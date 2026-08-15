@@ -1,5 +1,5 @@
 <img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png" />&nbsp;&nbsp;
-<span style="font-size: 22pt; nt-style: bold;">Module 01 Lab: Initial Flight Check</span>
+<span style="font-size: 32px; nt-style: bold;">Module 01 Lab: Initial Flight Check</span>
 
 ## Topic
 
