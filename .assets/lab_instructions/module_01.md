@@ -3,6 +3,7 @@
 ## Topic
 
 Configuring and checking the development environment.
+The project will encompass flight-deck operations.
 
 ## Goals
 
