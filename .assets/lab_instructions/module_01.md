@@ -1,11 +1,13 @@
+![nTier Logo](../images/ntier-logo.png)
+
 # Module 01 Lab: Avionics Environment Setup and Initial Flight Check
 
-**Lab Topic:** Configuring the GNAT compiler and Alire package manager to verify the development workstation environment.
+**Lab Topic:** Configuring and checking the development environment.
 
 ## Goals
 
-- Ensure the developer can successfully use GNAT Studio (or VS Code), Visual Studio Code, and Alire together.
-- Compile and execute a baseline Ada program to confirm the toolchain functions correctly across different operating systems.
+- Ensure the developer can successfully use Visual Studio Code, Alire, and GNAT.
+- Compile and execute a baseline Ada program to confirm the toolchain functions correctly.
 
 ## Prerequisites
 
@@ -36,14 +38,20 @@ gnat_native 15.2.1  Default
 
 ### Step 1.1: Initialize a new workspace named `flight_deck`
 
-Open a terminal (any OS) and navigate to the folder where you keep your projects, then run:
+Here in VS Code with the *Flight_Deck* project open a terminal
+window in the lower panel.
+Use the following
+command to initialize the Ada project in this project folder.
+The first prompt will ask for the project name, enter *Flight_Deck*.
+Take the default values for all the remaining prompts.
 
 ```bash
-$ alr init --bin flight_deck
+$ alr init --bin --in-place
 ```
 
 - `--bin` tells Alire to scaffold an **executable** project (as opposed to a library).
-- This creates a new folder called `flight_deck/` with the following structure:
+- This creates the following structure in this folder.
+The explorer panel will update immediately with the new structure:
 
 ```
 flight_deck/
@@ -52,11 +60,6 @@ flight_deck/
 └── src/
     └── flight_deck.adb
 ```
-
-Move into the new project folder:
-
-```bash
-$ cd flight_deck
 ```
 
 Build the application:
@@ -65,7 +68,9 @@ Build the application:
 $ alr build
 ```
 
-Run the program (there isn't any output):
+Run the program.
+There isn't any output, the program does nothing.
+The check here is to make sure it runs without errors:
 
 ```bash
 $ alr run
@@ -73,7 +78,8 @@ $ alr run
 
 ### Step 1.2: Write the initialization program
 
-Open `src/flight_deck.adb` in your editor of choice (or wait until Part 2 to do this in VS Code) and replace its contents with the following:
+Double click the `src/flight_deck.adb` file to open in the editor.
+Replace the contents of the file with this:
 
 ```ada
 with Ada.Text_IO; use Ada.Text_IO;
@@ -88,9 +94,8 @@ begin
 end Flight_Deck;
 ```
 
-> The line `Put_Line ("F-16 Avionics Suite Initializing...");` is the one we will later attach a breakpoint to in Part 4, so keep that line intact.
-
 Save the file.
+Autosave should be turned on, but it's always a good idea to save.$ 
 
 ---
 
@@ -101,7 +106,7 @@ From inside the `flight_deck/` directory:
 ### Step 2.1: Build
 
 ```bash
-alr build
+$ alr build
 ```
 
 This resolves dependencies (none needed for this simple program), invokes `gprbuild` under the hood, and produces an executable in the `bin/` folder:
@@ -112,12 +117,12 @@ This resolves dependencies (none needed for this simple program), invokes `gprbu
 ### Step 2.2: Run
 
 ```bash
-alr run
+$ alr run
 ```
 
-Expected output:
+The expected output is:
 
-```
+```txt
 F-16 Avionics Suite Initializing...
 Radar................ OK
 Navigation Systems... OK
@@ -128,7 +133,7 @@ Power-On Self-Test Complete. Ready for flight.
 You can also run the compiled binary directly without going through Alire:
 
 ```bash
-# Linux / Mac
+# Linux or Mac
 ./bin/flight_deck
 
 # Windows (PowerShell or cmd)
@@ -139,15 +144,7 @@ If you see the initialization message, your command-line toolchain (GNAT + Alire
 
 ---
 
-## Part 3 — Open the Project in VS Code
-
-### Step 3.1: Launch VS Code in the project folder
-
-From the terminal, still inside `flight_deck/`:
-
-```bash
-code .
-```
+## Part 3 — Use Run/Debug in VS Code
 
 ### Step 3.2: Install the Ada extension (if not already installed)
 
@@ -176,7 +173,9 @@ flight_deck/
 
 ## Part 4 — Configure `settings.json`
 
-`settings.json` tells VS Code (and the Ada extension) which GPR project file to use and ensures the integrated terminal has the Alire-managed toolchain on its `PATH`. Create `.vscode/settings.json` with the contents matching your OS below.
+`settings.json` tells VS Code (and the Ada extension) which GPR project file to use and ensures the integrated terminal has the Alire-managed toolchain on its `PATH`.
+Add the following attributes (inside the braces) to the `.vscode/settings.json`.
+Pick the example below that matches your operating system:
 
 ### Windows — `.vscode/settings.json`
 
@@ -204,7 +203,10 @@ flight_deck/
     "ada.scenarioVariables": {},
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.env.osx": {
-        "PATH": "${env:HOME}/.alire/bin:${env:PATH}"
+        "PATH": "${env:HOME}/.alire/bin:${env:PATH}",
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "LIBRARY_PATH": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib"
+    }
     },
     "files.associations": {
         "*.adb": "ada",
@@ -232,9 +234,12 @@ flight_deck/
 }
 ```
 
-> **Note:** If `alr` reports a different installation path on your machine (run `alr version` — it will show where the toolchain is rooted), adjust the `PATH` entries above to match. The goal is simply that `gnat`, `gprbuild`, and `gdb` resolve correctly inside the VS Code integrated terminal.
+> **Note:** If `alr` reports a different installation path on your machine (run `alr version` —
+it will show where the toolchain is rooted), adjust the `PATH` entries above to match.
+The goal is simply that `gnat`, `gprbuild`, and `gdb` resolve correctly inside the VS Code integrated terminal.
 
-After saving `settings.json`, reload VS Code (`Ctrl+Shift+P` / `Cmd+Shift+P` → "Developer: Reload Window") so the Ada extension picks up `flight_deck.gpr`.
+After saving `settings.json`, reload VS Code (`Ctrl+Shift+P` / `Cmd+Shift+P` →
+"Developer: Reload Window") so the Ada extension picks up `flight_deck.gpr`.
 
 ---
 
@@ -418,4 +423,7 @@ Click the red dot again to remove it, or right-click it and choose **Disable Bre
 - [ ] Breakpoint set on the `Put_Line ("F-16 Avionics Suite Initializing...")` line successfully pauses execution.
 - [ ] Execution resumes and completes after clicking **Continue**.
 
-**End of Lab.**
+<br>
+
+![Stop](../images/stop.png)
+<font size="+1">Congratulations! You have completed this lab.</font>
