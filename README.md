@@ -15,7 +15,7 @@ $ is the command prompt.
 
 ```bash
 $ cd [your projects folder]
-$ git clone https://github.com/ntiertraining/introduction_to_ada flight_deck
+$ git clone https://github.com/ntiertraining/introduction-to-ada flight_deck
 ```
 
 Change directory into the new project:

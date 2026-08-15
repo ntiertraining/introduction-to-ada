@@ -60,7 +60,12 @@ flight_deck/
 └── src/
     └── flight_deck.adb
 ```
-```
+
+Double-click on the *src/flight_deck.adb* file to open it.
+
+Click and hold on the tab for these instructions and drag it top center of the right half of the editor window.
+The right half will highlight, drop the tab.
+Now both the file and instructions are open side-by-side.
 
 Build the application:
 
