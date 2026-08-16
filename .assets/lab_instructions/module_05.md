@@ -29,7 +29,7 @@ event occurred.
 
 ## Instructions
 
-1. Open `flight_deck.adb` from the Module 4 project.
+1. Open `flight_deck.adb`.
 2. Declare `type Air_Data_Type is record ... end record`, with five
    components: `Airspeed : Airspeed_Type`, `Altitude : Altitude_Type`,
    `G_Force : G_Force_Type`, `Temperature : Float`, and

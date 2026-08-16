@@ -24,7 +24,7 @@ to an enclosing variable.
 
 ## Instructions
 
-1. Open `flight_deck.adb` from the Module 3 project. Everything below adds
+1. Open `flight_deck.adb`. Everything below adds
    subprogram declarations to the existing declarative part; no separate
    file and no package enter this lab.
 2. Declare a function named `Safety_Ratio`, taking `Airspeed : Airspeed_Type`,

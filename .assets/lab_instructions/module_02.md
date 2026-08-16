@@ -41,8 +41,7 @@ names are specified below and carry forward into later modules.
 
 ## Instructions
 
-1. Open the `flight_deck` project created in Module 1. Locate the main
-   procedure file inside `src/`.
+1. Open the `src/flight_deck.adb` file.
 2. Add a `with` clause for `Ada.Text_IO` above the procedure declaration.
    Add a corresponding `use` clause. State in a comment why the `use`
    clause removes the need for a fully qualified prefix on every

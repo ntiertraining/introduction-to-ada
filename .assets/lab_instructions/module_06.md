@@ -1,4 +1,4 @@
-<h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 06: Composite Types (Recoreds and Arrays)</h1>
+<h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 06: Composite Types (Records and Arrays)</h1>
 
 ## Goals
 
@@ -26,7 +26,7 @@ data, rather than only re-printing what Module 5 already stored.
 
 ## Instructions
 
-1. Open `flight_deck.adb` from the Module 5 project. Add a `with` clause
+1. Open `flight_deck.adb`. Add a `with` clause
    for `Ada.Unchecked_Deallocation` above the procedure declaration; no
    `use` clause applies, since the package supplies a generic procedure
    rather than a set of directly visible names. An access type in Ada
