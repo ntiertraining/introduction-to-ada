@@ -12,7 +12,7 @@
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "gdb.exe",
+            "miDebuggerPath": "C:\\Users\\carlj\\AppData\\Local\\alire\\cache\\toolchains\\gnat_native_16.1.0_bbd69633\\bin\\gdb.exe",
             "preLaunchTask": "alr-build"
         }
     ]

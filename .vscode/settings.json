@@ -3,7 +3,7 @@
     "ada.scenarioVariables": {},
     "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.env.windows": {
-        "PATH": "${env:USERPROFILE}\\.alire\\bin;${env:PATH}"
+        "PATH": "${env:USERPROFILE}\\alire\\bin;${env:PATH}"
     },
     "files.associations": {
         "*.adb": "ada",
