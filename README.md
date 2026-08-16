@@ -84,4 +84,4 @@ $ code .
 [Module 07: Exceptions and Error Handling](./.assets/lab_instructions/module_07.md)<br>
 [Module 08: Generics](./.assets/lab_instructions/module_08.md)<br>
 [Module 09: Task and Concurrency](./.assets/lab_instructions/module_09.md)<br>
-[Module 10: Putting it Together](./.assets/lab_instructions/module_10.md)<br>
+<!-- [Module 10: Putting it Together](./.assets/lab_instructions/module_10.md)<br> -->
