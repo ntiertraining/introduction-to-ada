@@ -1,6 +1,27 @@
-<h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 2: Basic Syntax and Data Types</h1>
+# Module 2 Lab: Cockpit Telemetry Data Declaration
 
-## Topic
+**Builds on:** Module 1 — Avionics Environment Setup and Initial Flight Check
+**Project:** `flight_deck` (continued)
+
+This lab reinforces the topics covered in Module 2 — Basic Syntax and Data Types:
+
+- Basic program structure, comments, `with`/`use`
+- `procedure`, `function`, `package` (minimal)
+- Identifier naming conventions
+- Variable declarations
+- Scalar types: Integer, Float, Boolean, Character
+- Strings
+- Derived types
+- Subtypes, constraints, and compile-time / run-time checking
+- Enumeration types
+- Constants
+- Strong typing
+- Type conversion / casting and implicit conversions
+- Scalar attributes
+
+---
+
+## Lab Topic
 
 **Cockpit Telemetry Data Declaration** — Implementing strongly typed variables, scalar types, subtypes, and constants to represent aircraft sensor data.
 
@@ -22,7 +43,7 @@
 
 You'll keep `flight_deck.adb` from Module 1 as-is and add a second, independent program in the same project.
 
-1. Inside `/src/`, create a new file named `cockpit_telemetry.adb`.
+1. Inside `flight_deck/src/`, create a new file named `cockpit_telemetry.adb`.
 2. Start it with the minimal shell below — you'll fill in the rest as you work through the tasks:
 
    ```ada
