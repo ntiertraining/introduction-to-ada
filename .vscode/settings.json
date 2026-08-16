@@ -1,10 +1,13 @@
 {
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 1000,
-    "editor.minimap.enabled": false,
-    "workbench.startupEditor": "none",
-    "workbench.editorAssociations": {
-        "*.md": "vscode.markdown.preview.editor"
+    "ada.projectFile": "flight_deck.gpr",
+    "ada.scenarioVariables": {},
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.env.windows": {
+        "PATH": "${env:USERPROFILE}\\.alire\\bin;${env:PATH}"
     },
-    "workbench.secondarySideBar.defaultVisibility": "hidden"
+    "files.associations": {
+        "*.adb": "ada",
+        "*.ads": "ada",
+        "*.gpr": "ada"
+    }
 }

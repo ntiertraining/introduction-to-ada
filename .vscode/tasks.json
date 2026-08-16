@@ -2,13 +2,15 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Open README on startup",
+            "label": "alr-build",
             "type": "shell",
-            "command": "code -r \"${workspaceFolder}/README.md\"",
-            "problemMatcher": [],
-            "runOptions": {
-                "runOn": "folderOpen"
-            }
+            "command": "alr",
+            "args": ["build"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
         }
     ]
 }
