@@ -1,312 +1,187 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 2: Basic Syntax and Data Types</h1>
 
-## Topic
-
-**Cockpit Telemetry Data Declaration** — Implementing strongly typed variables, scalar types, subtypes, and constants to represent aircraft sensor data.
-
 ## Goals
 
-- Practice declaring variables using basic scalar types such as integers, floats, booleans, and characters.
-- Utilize Ada's strong typing, custom subtypes, and constrained ranges to represent physical limits safely.
+The lab builds a cockpit telemetry data set inside the existing `flight_deck`
+procedure. Emphasis falls on scalar declarations, constrained subtypes,
+enumeration types, and strong typing enforcement. The exercise extends the
+initialization messages produced in Module 1 with a structured set of
+constants and variables representing live aircraft telemetry. Identifier
+names are specified below and carry forward into later modules.
 
 ## Requirements
 
-- The program must declare constants for maximum structural limits, such as maximum gravitational force (`9.0`) and maximum airspeed (`Mach 2.0`).
-- The developer must define constrained integer subtypes for altitude and speed to leverage compile-time and run-time constraint checking.
-- The developer must implement enumeration types for flight modes (e.g., `Nav`, `Dogfight`, `Landing`) and boolean flags for weapon systems safety status (armed versus safe).
-- Explicit type conversions must be performed when combining different numeric scalar types.
+- Declare minimum and maximum constants for the following, using appropriate
+  scalar types for each pairing:
+  - Airspeed: 120 knots minimum, 1175 knots maximum
+  - Altitude: 300 feet minimum, 50000 feet maximum
+  - G-force: -3 minimum, +7.3 maximum
+  - Critical angle of attack: 15 degrees
+- Define constrained subtypes for airspeed, altitude, and g-force. Base
+  airspeed and altitude on `Integer`. Base g-force on `Float`, since the
+  stated limits carry a fractional maximum; a constrained `Integer` subtype
+  cannot represent 7.3 without truncation, and truncation defeats the
+  purpose of the constraint.
+- Declare a constant for wing area (300 square feet) and a constant for
+  angle of attack (15 degrees).
+- Declare variables for aircraft weight (26,500 pounds) and outside air
+  temperature. Weight remains fixed for this lab; temperature varies and
+  requires an initial value chosen by the developer.
+- Implement an enumeration type for flight mode with three values: `Nav`,
+  `Dogfight`, `Landing`. Assign an initial mode.
+- Add a boolean variable representing weapon systems safety status. `True`
+  indicates armed, `False` indicates safe. Initialize to safe.
+- Perform at least one calculation requiring an explicit type conversion
+  between an `Integer`-based subtype and a `Float` value. Wing loading
+  (weight divided by wing area) satisfies this requirement, as does any
+  ratio built from the airspeed subtype and a `Float` denominator.
+- Output every constant and variable to the terminal with a labeled
+  `Put_Line` statement. Format numeric output using the appropriate
+  `'Image` attribute rather than string concatenation of raw literals.
 
----
+## Instructions
 
-## Setup: Add a New Program to the `flight_deck` Project
-
-You'll keep `flight_deck.adb` from Module 1 as-is and add a second, independent program in the same project.
-
-1. Inside `/src/`, create a new file named `cockpit_telemetry.adb`.
-2. Start it with the minimal shell below — you'll fill in the rest as you work through the tasks:
-
-   ```ada
-   with Ada.Text_IO; use Ada.Text_IO;
-
-   procedure Cockpit_Telemetry is
-
-      --  TODO: your declarations go here (Tasks 1-4)
-
-   begin
-
-      --  TODO: your statements go here (Tasks 5-8)
-
-   end Cockpit_Telemetry;
-   ```
-
-3. Open `flight_deck.gpr` at the project root and find:
-
-   ```ada
-   for Main use ("flight_deck.adb");
-   ```
-
-   Change it to register the new program as a second executable entry point:
-
-   ```ada
-   for Main use ("flight_deck.adb", "cockpit_telemetry.adb");
-   ```
-
-   Save the file.
-
----
-
-## Tasks
-
-Work through these in order — each one builds on the last. Write your code directly into `cockpit_telemetry.adb`.
-
-### Task 1 — Declare Constants
-
-In the declarative part, declare two constants:
-
-- `Max_G_Force`, a `Float`, set to `9.0`
-- `Max_Airspeed_Mach`, a `Float`, set to `2.0`
-
-### Task 2 — Derived Type and Constrained Subtypes
-
-- Declare a derived type named `Feet` based on `Integer`.
-- Declare a subtype named `Altitude_Type` based on `Feet`, constrained to the range `0 .. 60_000`.
-- Declare a subtype named `Airspeed_Knots` based on `Integer`, constrained to the range `0 .. 1_200`.
-
-### Task 3 — Enumeration Type
-
-Declare an enumeration type named `Flight_Mode` with the values `Nav`, `Dogfight`, and `Landing`.
-
-### Task 4 — Variable Declarations
-
-Declare the following variables, giving each a sensible initial value:
-
-- `Current_Altitude` of type `Altitude_Type`
-- `Current_Speed` of type `Airspeed_Knots`
-- `Current_Mode` of type `Flight_Mode`
-- `Weapons_Armed`, a `Boolean` (`True` = armed, `False` = safe)
-- `Pilot_Initials`, a single `Character`
-- `Current_G`, a `Float`
-
-### Task 5 — Print a Telemetry Snapshot
-
-In the statement part, use `Put_Line` to print each of the Task 4 values. You'll need the `'Image` attribute to convert non-string values into `String` for concatenation with `&`. Also print `"Weapons Status: ARMED"` or `"Weapons Status: SAFE"` based on `Weapons_Armed`.
-
-### Task 6 — Explicit Type Conversion
-
-`Current_Speed` is an `Integer`-based subtype, but you need a `Float` to compare against `Max_Airspeed_Mach`. Using a `declare` block:
-
-1. Convert `Current_Speed` to `Float` explicitly.
-2. Compute an approximate Mach number by dividing that float by `660.0`.
-3. Print the approximate Mach value.
-4. If it exceeds `Max_Airspeed_Mach`, print a warning.
-
-Then, separately, compare `Current_G` against `Max_G_Force` and print whether the aircraft is within its structural limit.
-
-### Task 7 — Trigger a Compile-Time Constraint Check
-
-Temporarily add the following line to your declarative part:
-
-```ada
-Bad_Altitude : Altitude_Type := 70_000;
-```
-
-Run `alr build` and observe what happens. Once you've confirmed the compiler catches it, comment the line back out (or delete it) so the project builds cleanly again.
-
-### Task 8 — Trigger a Run-Time Constraint Check
-
-In the statement part, add a `declare` block that:
-
-1. Declares a local variable `Boosted_Speed` of type `Airspeed_Knots` (no initial value).
-2. Assigns `Current_Speed + 900` to it.
-3. Prints `Boosted_Speed` if the assignment succeeds.
-4. Includes an `exception` handler for `Constraint_Error` that prints a message indicating the value exceeded the safe envelope.
-
-Think about why this particular check can only be caught at run time, and not at compile time like Task 7.
-
-### Task 9 (Stretch) — Scalar Attributes
-
-Using `'First` and `'Last`, print the lower and upper bounds of `Altitude_Type` and `Airspeed_Knots`.
-
----
-
-## Compile and Test from the Command Line
-
-From the `flight_deck/` project root:
-
-```bash
-alr build
-```
-
-Run your program:
-
-```bash
-# Linux / Mac
-./bin/cockpit_telemetry
-
-# Windows (PowerShell or cmd)
-.\bin\cockpit_telemetry.exe
-```
-
-Confirm:
-
-- The telemetry snapshot prints correctly.
-- Task 7's out-of-range constant fails the **build** when uncommented, and the build succeeds again once removed/commented.
-- Task 8's `Boosted_Speed` assignment raises `Constraint_Error` at **run time**, caught by your exception handler.
-
----
-
-## Run and Debug from VS Code
-
-1. Add a second configuration to `.vscode/launch.json`, alongside `"Debug flight_deck"` from Module 1:
-
-   ```json
-   {
-       "name": "Debug cockpit_telemetry",
-       "type": "cppdbg",
-       "request": "launch",
-       "program": "${workspaceFolder}/bin/cockpit_telemetry",
-       "args": [],
-       "stopAtEntry": false,
-       "cwd": "${workspaceFolder}",
-       "environment": [],
-       "externalConsole": false,
-       "MIMode": "gdb",
-       "miDebuggerPath": "gdb",
-       "preLaunchTask": "alr-build"
-   }
-   ```
-
-   > On Windows, set `"program"` to `${workspaceFolder}/bin/cockpit_telemetry.exe` and `"miDebuggerPath"` to `gdb.exe`.
-
-2. Set a breakpoint on your Task 8 assignment line (`Boosted_Speed := Current_Speed + 900;`).
-3. Select **"Debug cockpit_telemetry"** in the Run and Debug dropdown and press `F5`.
-4. Step **Over** (`F10`) the breakpointed line and watch execution jump into your `exception` handler as `Constraint_Error` is raised.
-
----
-
-## Lab Checklist
-
-- [ ] `cockpit_telemetry.adb` created and registered as a second main in `flight_deck.gpr`.
-- [ ] Constants `Max_G_Force` and `Max_Airspeed_Mach` declared (Task 1).
-- [ ] `Feet` derived type and `Altitude_Type` / `Airspeed_Knots` subtypes declared (Task 2).
-- [ ] `Flight_Mode` enumeration declared (Task 3).
-- [ ] All required variables declared with sensible initial values (Task 4).
-- [ ] Telemetry snapshot prints correctly, including weapons status (Task 5).
-- [ ] Explicit `Float` conversion used to compute and check approximate Mach and G-force (Task 6).
-- [ ] Compile-time constraint violation demonstrated and then removed (Task 7).
-- [ ] Run-time constraint violation demonstrated and caught with an exception handler (Task 8).
-- [ ] (Stretch) Scalar attributes printed for both subtypes (Task 9).
-- [ ] Program builds and runs cleanly from the command line.
-- [ ] `launch.json` extended and breakpoint debugging confirmed in VS Code.
-
----
+1. Open the `flight_deck` project created in Module 1. Locate the main
+   procedure file inside `src/`.
+2. Add a `with` clause for `Ada.Text_IO` above the procedure declaration.
+   Add a corresponding `use` clause. State in a comment why the `use`
+   clause removes the need for a fully qualified prefix on every
+   `Put_Line` call.
+3. Inside the declarative part of `flight_deck`, declare the following
+   paired constants for airspeed, altitude, and g-force. Use these exact
+   names, referenced again in later modules:
+   - `Min_Airspeed : constant := 120` and `Max_Airspeed : constant := 1175`
+   - `Min_Altitude : constant := 300` and `Max_Altitude : constant := 50_000`
+   - `Min_G_Force : constant := -3.0` and `Max_G_Force : constant := 7.3`
+   Declare the critical angle of attack separately as
+   `Critical_Angle_Of_Attack : constant := 15`, since no paired minimum
+   applies to it.
+4. Declare three constrained subtypes, using these exact names, referencing
+   the paired constants from step 3 rather than repeating literal values:
+   - `subtype Airspeed_Type is Integer range Min_Airspeed .. Max_Airspeed`
+   - `subtype Altitude_Type is Integer range Min_Altitude .. Max_Altitude`
+   - `subtype G_Force_Type is Float range Min_G_Force .. Max_G_Force`
+   Add a short comment above `G_Force_Type` explaining the choice of
+   `Float` over `Integer`.
+5. Declare `Wing_Area : constant Float := 300.0` and
+   `Angle_Of_Attack : constant Integer := 15`.
+6. Declare `Aircraft_Weight : Float := 26_500.0` and
+   `Temperature : Float`. Choose and assign a reasonable starting value
+   for temperature.
+7. Declare `type Flight_Mode_Type is (Nav, Dogfight, Landing)` and a
+   variable named `Flight_Mode` of that type. Initialize `Flight_Mode`
+   to `Nav`.
+8. Declare `Weapons_Armed : Boolean := False`.
+9. Declare working variables of the subtypes from step 4, using these
+   exact names: `Current_Airspeed : Airspeed_Type`,
+   `Current_Altitude : Altitude_Type`, `Current_G_Force : G_Force_Type`.
+   Assign initial values that fall within each constrained range. Attempt,
+   temporarily, to assign a value outside one range and observe the
+   compiler or runtime response; remove the out-of-range assignment before
+   proceeding.
+10. Declare `Wing_Loading : Float` and `Airspeed_Fraction : Float` to hold
+    the results calculated in steps 11 and 12.
+11. In the executable part of the procedure, calculate `Wing_Loading` by
+    dividing `Aircraft_Weight` by `Wing_Area`. Both operands are already
+    `Float`, so no conversion applies here; note this in a comment as a
+    contrast to the next step.
+12. Calculate `Airspeed_Fraction` by dividing `Current_Airspeed` by
+    `Max_Airspeed`. Apply an explicit `Float` conversion to the integer
+    operand before dividing. Explain in a comment why Ada rejects the
+    unconverted expression at compile time.
+13. Output every constant, variable, and calculated result with a labeled
+    `Put_Line` statement. Use `'Image` for numeric conversion to string.
+14. Compile and run the program from the integrated terminal. Confirm all
+    output values match the assigned initial values and calculations.
+15. Set a breakpoint on the line calculating `Wing_Loading`. Launch the
+    debugger using the `launch.json` configuration created in Module 1.
+    When execution halts, inspect the current values of `Aircraft_Weight`,
+    `Wing_Area`, and the constrained telemetry variables in the debugger
+    variable pane. Step over the calculation and confirm the resulting
+    value.
 
 ## Solution
 
 ```ada
 with Ada.Text_IO; use Ada.Text_IO;
 
-procedure Cockpit_Telemetry is
+procedure Flight_Deck is
 
-   --------------------------------------------------------------------------
-   --  Task 1: Constants — structural / performance limits
-   --------------------------------------------------------------------------
-   Max_G_Force       : constant Float := 9.0;
-   Max_Airspeed_Mach : constant Float := 2.0;
+   -- Airspeed limits, in knots.
+   Min_Airspeed : constant := 120;
+   Max_Airspeed : constant := 1175;
 
-   --------------------------------------------------------------------------
-   --  Task 2: Derived type and constrained subtypes
-   --------------------------------------------------------------------------
-   type Feet is new Integer;
+   -- Altitude limits, in feet.
+   Min_Altitude : constant := 300;
+   Max_Altitude : constant := 50_000;
 
-   subtype Altitude_Type  is Feet    range 0 .. 60_000;
-   subtype Airspeed_Knots is Integer range 0 .. 1_200;
+   -- G-force limits. A Float maximum of 7.3 rules out an Integer subtype.
+   Min_G_Force : constant := -3.0;
+   Max_G_Force : constant := 7.3;
 
-   -- Task 7 demonstration (leave commented for a clean build):
-   -- Bad_Altitude : Altitude_Type := 70_000;  -- COMPILE-TIME constraint violation
+   -- Critical angle of attack, in degrees. No paired minimum applies.
+   Critical_Angle_Of_Attack : constant := 15;
 
-   --------------------------------------------------------------------------
-   --  Task 3: Enumeration type
-   --------------------------------------------------------------------------
-   type Flight_Mode is (Nav, Dogfight, Landing);
+   subtype Airspeed_Type is Integer range Min_Airspeed .. Max_Airspeed;
+   subtype Altitude_Type  is Integer range Min_Altitude .. Max_Altitude;
 
-   --------------------------------------------------------------------------
-   --  Task 4: Variable declarations
-   --------------------------------------------------------------------------
-   Current_Altitude : Altitude_Type  := 35_000;
-   Current_Speed    : Airspeed_Knots := 450;
-   Current_Mode     : Flight_Mode    := Nav;
-   Weapons_Armed    : Boolean        := False;
-   Pilot_Initials   : Character      := 'M';
-   Current_G        : Float          := 1.2;
+   -- Float subtype: fractional maximum (7.3) cannot be represented by a
+   -- constrained Integer subtype without truncation.
+   subtype G_Force_Type is Float range Min_G_Force .. Max_G_Force;
+
+   Wing_Area       : constant Float   := 300.0; -- square feet
+   Angle_Of_Attack : constant Integer := 15;     -- degrees
+
+   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Temperature     : Float := 15.0;     -- degrees Celsius, standard day
+
+   type Flight_Mode_Type is (Nav, Dogfight, Landing);
+   Flight_Mode : Flight_Mode_Type := Nav;
+
+   Weapons_Armed : Boolean := False;
+
+   Current_Airspeed : Airspeed_Type := 450;
+   Current_Altitude : Altitude_Type := 20_000;
+   Current_G_Force  : G_Force_Type  := 1.0;
+
+   Wing_Loading      : Float;
+   Airspeed_Fraction : Float;
 
 begin
-   --  Task 5: Telemetry snapshot
-   Put_Line ("=== Cockpit Telemetry Snapshot ===");
-   Put_Line ("Pilot: " & Pilot_Initials);
-   Put_Line ("Mode: " & Flight_Mode'Image (Current_Mode));
-   Put_Line ("Altitude (ft): " & Feet'Image (Current_Altitude));
-   Put_Line ("Airspeed (kt): " & Integer'Image (Current_Speed));
+   Put_Line("Cockpit Telemetry Data Set");
+   Put_Line("---------------------------");
 
-   if Weapons_Armed then
-      Put_Line ("Weapons Status: ARMED");
-   else
-      Put_Line ("Weapons Status: SAFE");
-   end if;
+   Put_Line("Min Airspeed (kt): " & Integer'Image(Min_Airspeed));
+   Put_Line("Max Airspeed (kt): " & Integer'Image(Max_Airspeed));
+   Put_Line("Min Altitude (ft): " & Integer'Image(Min_Altitude));
+   Put_Line("Max Altitude (ft): " & Integer'Image(Max_Altitude));
+   Put_Line("Min G-Force: " & Float'Image(Min_G_Force));
+   Put_Line("Max G-Force: " & Float'Image(Max_G_Force));
+   Put_Line("Critical Angle Of Attack (deg): " &
+            Integer'Image(Critical_Angle_Of_Attack));
 
-   --  Task 6: Explicit type conversion
-   declare
-      Speed_As_Float : constant Float := Float (Current_Speed);
-      Approx_Mach    : constant Float := Speed_As_Float / 660.0;
-   begin
-      Put_Line ("Approx Mach: " & Float'Image (Approx_Mach));
+   Put_Line("Wing Area (sq ft): " & Float'Image(Wing_Area));
+   Put_Line("Angle Of Attack (deg): " & Integer'Image(Angle_Of_Attack));
+   Put_Line("Aircraft Weight (lb): " & Float'Image(Aircraft_Weight));
+   Put_Line("Temperature (C): " & Float'Image(Temperature));
 
-      if Approx_Mach > Max_Airspeed_Mach then
-         Put_Line ("WARNING: Airspeed exceeds Mach limit!");
-      end if;
-   end;
+   Put_Line("Flight Mode: " & Flight_Mode_Type'Image(Flight_Mode));
+   Put_Line("Weapons Armed: " & Boolean'Image(Weapons_Armed));
 
-   if Current_G > Max_G_Force then
-      Put_Line ("WARNING: G-force exceeds structural limit!");
-   else
-      Put_Line ("G-force within structural limit (" & Float'Image (Current_G) &
-                 " / " & Float'Image (Max_G_Force) & ")");
-   end if;
+   Put_Line("Current Airspeed (kt): " & Integer'Image(Current_Airspeed));
+   Put_Line("Current Altitude (ft): " & Integer'Image(Current_Altitude));
+   Put_Line("Current G-Force: " & Float'Image(Current_G_Force));
 
-   --  Task 8: Run-time constraint check
-   declare
-      Boosted_Speed : Airspeed_Knots;
-   begin
-      Boosted_Speed := Current_Speed + 900;  -- 450 + 900 = 1350 > 1_200
-      Put_Line ("Boosted speed: " & Integer'Image (Boosted_Speed));
-   exception
-      when Constraint_Error =>
-         Put_Line ("Runtime check failed: boosted speed exceeds safe envelope (Constraint_Error).");
-   end;
+   -- Both operands are already Float; no conversion required.
+   Wing_Loading := Aircraft_Weight / Wing_Area;
+   Put_Line("Wing Loading (lb/sq ft): " & Float'Image(Wing_Loading));
 
-   --  Task 9 (Stretch): Scalar attributes
-   Put_Line ("Altitude_Type range: " & Feet'Image (Altitude_Type'First) &
-              " .. " & Feet'Image (Altitude_Type'Last));
-   Put_Line ("Airspeed_Knots range: " & Integer'Image (Airspeed_Knots'First) &
-              " .. " & Integer'Image (Airspeed_Knots'Last));
+   -- Current_Airspeed is Airspeed_Type, an Integer subtype. Max_Airspeed
+   -- is a universal integer. Division against a Float denominator
+   -- requires an explicit Float conversion on the integer operand; Ada
+   -- performs no implicit conversion between numeric types.
+   Airspeed_Fraction := Float(Current_Airspeed) / Float(Max_Airspeed);
+   Put_Line("Airspeed Fraction Of Max: " & Float'Image(Airspeed_Fraction));
 
-end Cockpit_Telemetry;
+end Flight_Deck;
 ```
-
-### Expected Output
-
-```
-=== Cockpit Telemetry Snapshot ===
-Pilot: M
-Mode: NAV
-Altitude (ft):  35000
-Airspeed (kt):  450
-Weapons Status: SAFE
-Approx Mach:  6.81818E-01
-G-force within structural limit ( 1.20000E+00 /  9.00000E+00)
-Runtime check failed: boosted speed exceeds safe envelope (Constraint_Error).
-Altitude_Type range:  0 ..  60000
-Airspeed_Knots range:  0 ..  1200
-```
-
-> Exact `Float'Image` formatting may vary slightly by compiler version — the values and the `Constraint_Error` message are what matter.
