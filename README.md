@@ -80,8 +80,8 @@ $ code .
 [Module 03: Control Structures and Operators](./.assets/lab_instructions/module_03.md)<br>
 [Module 04: Subprograms](./.assets/lab_instructions/module_04.md)<br>
 [Module 05: Modular Programming](./.assets/lab_instructions/module_05.md)<br>
-[Module 06: Composite Types (Recoreds and Arrays)](./.assets/lab_instructions/module_06.md)<br>
+[Module 06: Composite Types (Records and Arrays)](./.assets/lab_instructions/module_06.md)<br>
 [Module 07: Exceptions and Error Handling](./.assets/lab_instructions/module_07.md)<br>
-[Module 08: Generics](./.assets/lab_instructions/module_08.md)<br>
-[Module 09: Task and Concurrency](./.assets/lab_instructions/module_09.md)<br>
-[Module 10: Putting it Together](./.assets/lab_instructions/module_10.md)<br>
+[Module 08: Input/Output Operations](./.assets/lab_instructions/module_08.md)<br>
+[Module 09: Exception Handling](./.assets/lab_instructions/module_09.md)<br>
+<!-- [Module 10: Putting it Together](./.assets/lab_instructions/module_10.md)<br> -->
