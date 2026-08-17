@@ -25,7 +25,12 @@ Some may already be installed and configured.
         <li>Click the package in the results, and in the window describing the extension install it.
     </ol>
 
-1. Install *Alire*, the Ada package and toolchain manager. Download the file from *[https://alire.ada.dev](https://alire.ada.dev)*.
+1. Install Git: download and run the appropriate installer from [https://git-scm.com/install/](https://git-scm.com/install/).
+
+1. Install *Alire*, the Ada package and toolchain manager.
+    For Microsoft Windows you can install using *winget install Alire.Alire*, or use the following download instructions.
+    We recommend skipping any package manager on Mac and Linux.
+    Download the file from *[https://alire.ada.dev](https://alire.ada.dev)*.
     * For Apple macOS and Linux the zip file only contains the *alr* program; extract this and move it to /usr/local/bin.
     * For Microsoft Windows:
         <ol type="a">
