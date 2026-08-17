@@ -9,9 +9,9 @@
 
 Welcome to the lab project repository for the nTier Traininbg Introduction to Ada course.
 
-## Local Computer
+## Setup for a Local Development Computer
 
-### Install the development environment on the local computer
+### Install the development environment
 
 Install these packages as necessary.
 Some may already be installed and configured.
@@ -46,7 +46,7 @@ Some may already be installed and configured.
 
 1. That is it, all done!
 
-### Install the lab environment on the local computer
+### Copy the labs to the local computer
 
 Use the following *git* command on your local computer to clone this repository into a new project and call it *flight_deck*.
 The first parameter is the URL to the repository, the second is the name to give the clone.
