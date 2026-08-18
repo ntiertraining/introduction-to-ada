@@ -1,5 +1,7 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png" />&nbsp;&nbsp;Module 01 Lab: Initial Flight Check</h1>
 
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
+
 ## Topic
 
 Configuring and checking the development environment.
@@ -434,3 +436,5 @@ Click the red dot again to remove it, or right-click it and choose **Disable Bre
 
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
+
+[Return to list of module lab instructions](/README.md#module-lab-instructions)

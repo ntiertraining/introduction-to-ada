@@ -1,5 +1,7 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 08: Input/Output Operations</h1>
 
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
+
 ## Goals
 
 The lab adds a text file record of every simulated in-flight event,
@@ -104,6 +106,13 @@ ends, takes its place as the record of what occurred.
     event is already visible in the file on disk, before the program
     continues; without the explicit `Flush`, the line might sit in a
     buffer, invisible to a separate reader, until the file closes.
+
+<br>
+
+![Stop](../images/stop.png)
+<font size="+1">Congratulations! You have completed this lab.</font>
+
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
 
 ## Notes
 

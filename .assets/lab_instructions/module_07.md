@@ -1,5 +1,7 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 07: Exceptions and Error Handling</h1>
 
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
+
 ## Goals
 
 The lab divides the single-file `flight_deck` program from Module 6 into a
@@ -133,6 +135,13 @@ wraps that data and its computed results into a loggable object.
     This is separate compilation in practice: a change confined to one
     package's body affects only that package and whatever calls it.
     Restore `Base_Stall_Speed` afterward.
+
+<br>
+
+![Stop](../images/stop.png)
+<font size="+1">Congratulations! You have completed this lab.</font>
+
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
 
 ## Notes
 

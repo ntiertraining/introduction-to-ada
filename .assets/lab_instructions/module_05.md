@@ -1,5 +1,7 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 05: Modular Programming</h1>
 
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
+
 ## Goals
 
 The lab packages the five air-data values scattered across separate
@@ -117,6 +119,13 @@ event occurred.
     debugger and inspect `Data` and `Log` side by side across two or
     three iterations. Confirm each array entry keeps the values it was
     assigned, unaffected by the increments applied to `Data` afterward.
+
+<br>
+
+![Stop](../images/stop.png)
+<font size="+1">Congratulations! You have completed this lab.</font>
+
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
 
 ## Notes
 

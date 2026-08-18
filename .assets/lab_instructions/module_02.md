@@ -1,5 +1,7 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 2: Basic Syntax and Data Types</h1>
 
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
+
 ## Goals
 
 The lab builds a cockpit telemetry data set inside the existing `flight_deck`
@@ -98,6 +100,13 @@ names are specified below and carry forward into later modules.
     `Wing_Area`, and the constrained telemetry variables in the debugger
     variable pane. Step over the calculation and confirm the resulting
     value.
+
+<br>
+
+![Stop](../images/stop.png)
+<font size="+1">Congratulations! You have completed this lab.</font>
+
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
 
 ## Solution
 

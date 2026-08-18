@@ -1,5 +1,7 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 04: Subprograms</h1>
 
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
+
 ## Goals
 
 The lab decomposes the monolithic `flight_deck` procedure from Module 3
@@ -103,6 +105,13 @@ to an enclosing variable.
     caller's current values on entry and the caller's variables reflect
     the modification on return, without any global variable involved in
     the exchange.
+
+<br>
+
+![Stop](../images/stop.png)
+<font size="+1">Congratulations! You have completed this lab.</font>
+
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
 
 ## Notes
 

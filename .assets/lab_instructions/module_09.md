@@ -1,5 +1,7 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; MModule 09: Exception Handling</h1>
 
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
+
 ## Goals
 
 The lab introduces a simulated failure in the air data inertial reference
@@ -149,6 +151,13 @@ program.
     reads at least `Timeout_Threshold` when the breakpoint is reached.
     Step forward and watch execution leave `Run_Flight_Events` entirely,
     landing in the handler added in step 13.
+
+<br>
+
+![Stop](../images/stop.png)
+<font size="+1">Congratulations! You have completed this lab.</font>
+
+[Return to list of module lab instructions](/README.md#module-lab-instructions)
 
 ## Notes
 

@@ -7,76 +7,19 @@
 
 # Introduction
 
-Welcome to the lab project repository for the nTier Traininbg Introduction to Ada course.
+This is the lab project repository for the nTier Training course *"Introduction to Ada"*.
+This course uses Visual Studio Code as the integrated development environment (IDE) with Alire (alr) and GNAT as the build tools.
+The first module focuses are creating an Ada project in the workspace and running the program.
+The subsequent modules add to the project in the same workspace moving forward.
 
-## Setup for a Local Development Computer
+There are three ways to initialize the development environment:
 
-### Install the development environment
+* Setup for a Local Development Computer [follow the instructions on this page](./.assets/lab_instructions/local-install.md)
+* Clone this project onto a local computer with Docker, open the folder in VS Code, and use the *Dev Containers: Reopen in Container* command to launch the project in a local Docker container.
+* Follow [this link](https://codespaces.new/ntiertraining/introduction-to-ada) or click the green *Code* button on the GitHub page, select the Codespaces tab, and click the green button to *Create codespace on main* (launches a Docker container on GitHub's servers).
+Signing into GitHub with a personal account first is required to launch a codespace; using an organization account is discouraged.
 
-Install these packages as necessary.
-Some may already be installed and configured.
-
-1. Install Visual Studio Code. If you prefer use a package manager, or download directly from [https://code.visualstudio.com](https://code.visualstudio.com)
-
-1. Open Visual Studio Code:
-    <ol type="a">
-        <li>In the activity bar on the left find and click the *Extensions* icon (hover and it will display the name).</li>
-        <li>In the search bar enter *Ada & Spark*.</li>
-        <li>Click the package in the results, and in the window describing the extension install it.
-    </ol>
-
-1. Install Git: download and run the appropriate installer from [https://git-scm.com/install/](https://git-scm.com/install/).
-
-1. Install *Alire*, the Ada package and toolchain manager.
-    For Microsoft Windows you can install using *winget install Alire.Alire*, or use the following download instructions.
-    We recommend skipping any package manager on Mac and Linux.
-    Download the file from *[https://alire.ada.dev](https://alire.ada.dev)*.
-    * For Apple macOS and Linux the zip file only contains the *alr* program; extract this and move it to /usr/local/bin.
-    * For Microsoft Windows:
-        <ol type="a">
-            <li>Run the *.exe* installer downloaded in this step.</li>
-            <li>Click the *Windows* icon on the task bar and search for *Alire*. Run the program.</li>
-            <li>Use the command <i>alr --version</i> to make sure that *alr* runs.
-            <li>Use the <i>Control Panel</i> to add <i>C:\Program Files\Alire\bin</i> to the PATH so <i>alr</i> is visible from any command prompt.
-        </ol>
-
-1. Add the compile and build toolchain:
-    <ol type="a">
-        <li>Run the command <i>alr toolchain --select</i> to run the toolchain wizard.</li>
-        <li>Wait for <i>alr</i> to update the compile and build packages.</li>
-        <li>Pick the toolchain no. 1: <i>gnat_native</i>.</li>
-        <li>On the second chooser pick the first option: <i>gprbuild</i>.</li>
-        <li>Wait for <i>alr</i> to install the compiler and builder.</li>
-    </ol>
-
-1. That is it, all done!
-
-### Copy the labs to the local computer
-
-Use the following *git* command on your local computer to clone this repository into a new project and call it *flight_deck*.
-The first parameter is the URL to the repository, the second is the name to give the clone.
-$ is the command prompt.
-
-```bash
-$ cd [your projects folder]
-$ git clone https://github.com/ntiertraining/introduction-to-ada flight_deck
-```
-
-Change directory into the new project:
-
-```bash
-$ cd flight_deck
-```
-
-<!-- $ alr init --bin --in-place -->
-
-Launch Visual Studio Code in the current (flight_deck) directory.
-This README.md file will display.
-Click on the link for the Module 01 lab instructions and continue.
-
-```bash
-$ code .
-```
+Once the development environment is ready use the following links for the lab instructions:
 
 # Module Lab Instructions
 
