@@ -74,15 +74,20 @@ data, rather than only re-printing what Module 5 already stored.
    `Entry_Ref.all.Data`.
 8. Update `Report_Log` to call `Print_Log_Entry (Log(Index))` inside the
    existing `for Index in Log'Range loop`. Immediately after that call,
-   guard with `if Log(Index) /= null then`, and inside the guard,
-   recompute a fresh `Safety_Ratio` and `Is_Stall_Risk` from
-   `Log(Index).Data`, the same functions carried over from Module 5
-   unchanged. Report the freshly computed ratio next to the ratio stored
-   in `Log(Index).Safety_Ratio`, plus whether the two match. Comparing two
-   `Float` values for exact equality is normally unreliable; it holds
-   here only because both values come from the same deterministic
-   calculation run twice on the same inputs, with no rounding introduced
-   between the two calls.
+   guard with `if Log(Index) /= null then`, and inside the guard:
+   - Recompute a fresh `Safety_Ratio` from `Log(Index).Data`, the same
+     function carried over from Module 5 unchanged, and report it next to
+     the ratio stored in `Log(Index).Safety_Ratio`, plus whether the two
+     match.
+   - Recompute a fresh `Is_Stall_Risk` from `Log(Index).Data`, the same
+     function carried over from Module 5 unchanged, and report it next to
+     the risk stored in `Log(Index).Stall_Risk`, plus whether the two
+     match, the same way as the ratio comparison above.
+
+   Comparing two `Float` values for exact equality is normally
+   unreliable; it holds here only because both values come from the same
+   deterministic calculation run twice on the same inputs, with no
+   rounding introduced between the two calls.
 9. Update `Run_Flight_Events`. Immediately before the line that builds a
    new log entry, add `if Log(Event) /= null then Free(Log(Event)); end
    if;`. Follow it with `Log(Event) := Build_Event_Log(Data, Ratio,
@@ -154,7 +159,7 @@ procedure Flight_Deck is
    Wing_Area       : constant Float   := 300.0; -- square feet
    Angle_Of_Attack : constant Integer := 15;     -- degrees
 
-   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Aircraft_Weight : constant Float := 26_500.0; -- pounds
 
    type Flight_Mode_Type is (Nav, Dogfight, Landing);
    Flight_Mode : Flight_Mode_Type := Nav;
@@ -167,7 +172,7 @@ procedure Flight_Deck is
    Base_Stall_Speed : constant Float := 150.0; -- knots, 1g sea level
 
    Airspeed_Increment : constant Integer := -50;
-   G_Force_Increment  : constant Float   := 0.5;
+   G_Force_Increment  : constant Float   := 0.1;
    Angle_Increment    : constant Integer := 1;
    Event_Count        : constant Integer := 8;
 
@@ -317,6 +322,13 @@ procedure Flight_Deck is
                         ", Match: " &
                         Boolean'Image(Recomputed_Ratio =
                                       Log(Index).Safety_Ratio));
+               Put_Line("    Recomputed Risk: " &
+                        Boolean'Image(Recomputed_Risk) &
+                        ", Stored Risk: " &
+                        Boolean'Image(Log(Index).Stall_Risk) &
+                        ", Match: " &
+                        Boolean'Image(Recomputed_Risk =
+                                      Log(Index).Stall_Risk));
             end;
          end if;
       end loop;

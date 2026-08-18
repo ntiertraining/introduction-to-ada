@@ -31,17 +31,25 @@ event occurred.
 
 1. Open `flight_deck.adb`.
 2. Declare `type Air_Data_Type is record ... end record`, with five
-   components: `Airspeed : Airspeed_Type`, `Altitude : Altitude_Type`,
-   `G_Force : G_Force_Type`, `Temperature : Float`, and
-   `Angle_Of_Attack : Integer`. This record replaces the separate
-   `Current_Airspeed`, `Current_Altitude`, `Current_G_Force`, and
-   `Current_Angle_Of_Attack` variables from Module 4, and absorbs the
-   standalone `Temperature` variable as well; remove all five of those
-   declarations.
+   components:
+   - `Airspeed : Airspeed_Type`
+   - `Altitude : Altitude_Type`
+   - `G_Force : G_Force_Type`
+   - `Temperature : Float`
+   - `Angle_Of_Attack : Integer`
+
+   This record replaces the separate `Current_Airspeed`, `Current_Altitude`,
+   `Current_G_Force`, and `Current_Angle_Of_Attack` variables from Module 4,
+   and absorbs the standalone `Temperature` variable as well; remove all
+   five of those declarations.
 3. Declare `type Event_Log_Type is record ... end record`, with three
-   components: `Data : Air_Data_Type`, `Safety_Ratio : Float`, and
-   `Stall_Risk : Boolean`. One record now carries an air-data snapshot
-   together with what that snapshot produced.
+   components:
+   - `Data : Air_Data_Type`
+   - `Safety_Ratio : Float`
+   - `Stall_Risk : Boolean`
+
+   One record now carries an air-data snapshot together with what that
+   snapshot produced.
 4. Declare `type Event_Log_Array is array (1 .. Event_Count) of
    Event_Log_Type`. The bound relies on the existing `Event_Count`
    constant and on the default array index base of 1; no explicit lower
@@ -72,30 +80,36 @@ event occurred.
     assignment. `Data.Altitude` and `Data.Temperature` receive no
     increment, matching Module 4.
 12. Change `Initialize_Telemetry` from a procedure into a function
-    returning `Air_Data_Type`. Retain the same five default parameters
-    from Module 4, adding `Starting_Altitude : Altitude_Type := 20_000`
-    and renaming `Starting_G_Force`'s companions to match the new field
-    set. Build the return value with a named-association record
-    aggregate, `(Airspeed => Starting_Airspeed, Altitude =>
-    Starting_Altitude, G_Force => Starting_G_Force, Temperature =>
-    Starting_Temperature, Angle_Of_Attack => Starting_Angle)`, rather than
-    assigning through `out` parameters. The function builds a complete
-    record and returns it by value.
+    returning `Air_Data_Type`. The three existing defaults from Module 4 —
+    `Starting_Airspeed`, `Starting_G_Force`, and `Starting_Angle` — carry
+    over unchanged. This module adds two genuinely new defaulted
+    parameters: `Starting_Altitude : Altitude_Type := 20_000` and
+    `Starting_Temperature : Float := 15.0`; neither existed as a parameter
+    in Module 4, where `Temperature` was only a bare global constant.
+    Build the return value with a named-association record aggregate,
+    `(Airspeed => Starting_Airspeed, Altitude => Starting_Altitude,
+    G_Force => Starting_G_Force, Temperature => Starting_Temperature,
+    Angle_Of_Attack => Starting_Angle)`, rather than assigning through
+    `out` parameters. The function builds a complete record and returns it
+    by value.
 13. Change `Run_Flight_Events` to take `Data : in out Air_Data_Type` and
     `Log : in out Event_Log_Array`. Inside the per-event `declare` block,
     after computing `Ratio` and `Risk`, add `Log(Event) := (Data => Data,
-    Safety_Ratio => Ratio, Stall_Risk => Risk)` before the call to
-    `Apply_Increments`. The assignment copies the current state of `Data`
-    into the array; the copy holds steady even after `Apply_Increments`
-    changes `Data` on the next line. Replace the call to `Report_Attitude`
-    so it passes `Data` rather than a bare angle value.
-14. In the executable part of `flight_deck`, declare
+    Safety_Ratio => Ratio, Stall_Risk => Risk)` as the last statement in
+    that block. Call `Apply_Increments(Data)` immediately after the
+    `declare` block closes, not inside it. The assignment copies the
+    current state of `Data` into the array; the copy holds steady even
+    after `Apply_Increments` changes `Data` on the next line, once the
+    block has ended. Replace the call to `Report_Attitude` so it passes
+    `Data` rather than a bare angle value.
+14. In the declarative part of `flight_deck`, declare
     `Current_Air_Data : Air_Data_Type := Initialize_Telemetry;` in place
     of the four removed scalar variables, calling the function with no
     override arguments. Move this declaration, and the call it contains,
-    ahead of the constant-and-telemetry dump section, since that section
-    now reads several of its values from the record the call produces.
-15. In the dump section, replace the line printing the old `Temperature`
+    ahead of the constant-and-telemetry startup report section, since that
+    section now reads several of its values from the record the call
+    produces.
+15. In the startup report section, replace the line printing the old `Temperature`
     variable with one printing `Current_Air_Data.Temperature`. Add a line
     printing `Current_Air_Data.Altitude`, closing a gap from Module 4,
     where altitude was tracked but never actually reported.
@@ -172,7 +186,7 @@ procedure Flight_Deck is
    Wing_Area       : constant Float   := 300.0; -- square feet
    Angle_Of_Attack : constant Integer := 15;     -- degrees
 
-   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Aircraft_Weight : constant Float := 26_500.0; -- pounds
 
    type Flight_Mode_Type is (Nav, Dogfight, Landing);
    Flight_Mode : Flight_Mode_Type := Nav;
@@ -185,7 +199,7 @@ procedure Flight_Deck is
    Base_Stall_Speed : constant Float := 150.0; -- knots, 1g sea level
 
    Airspeed_Increment : constant Integer := -50;
-   G_Force_Increment  : constant Float   := 0.5;
+   G_Force_Increment  : constant Float   := 0.1;
    Angle_Increment    : constant Integer := 1;
    Event_Count        : constant Integer := 8;
 

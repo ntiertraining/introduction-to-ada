@@ -25,16 +25,26 @@ ends, takes its place as the record of what occurred.
 2. Add `("src/**")` coverage already handles this new subdirectory
    automatically, since `Source_Dirs` already recurses; no `.gpr` change
    is needed this time.
-3. In `src/io/`, create `event_file_logging.ads`, withing and using
-   `Telemetry_Types`. Declare four subprograms: `procedure Open_Log_File
-   (File_Name : in String := "flight_events.log");`, `procedure
-   Write_Event_Line (Event : in Integer; Data : in Air_Data_Type; Ratio :
-   in Float; Risk : in Boolean);`, `procedure Close_Log_File;`, and
-   `procedure Echo_Log_File (File_Name : in String :=
-   "flight_events.log");`. The default file name appears in two places
-   deliberately, so a caller who supplies no argument to either opens and
-   later echoes the same file without repeating the name at every call
-   site.
+3. This is the course's first file I/O: every `Get_Line`/`Put_Line` so
+   far has read from or written to the terminal, never a file. Ada
+   represents an open file as a value of `Ada.Text_IO.File_Type`, a
+   handle that later calls to `Put_Line`, `Get_Line`, and the rest
+   operate on instead of a bare filename; `Out_File` and `In_File` are
+   two of the `File_Mode` literals that fix, when a handle is created or
+   opened, whether it accepts writes or reads. In `src/io/`, create
+   `event_file_logging.ads`, withing and using `Telemetry_Types`.
+   Declare four subprograms:
+   - `procedure Open_Log_File (File_Name : in String :=
+     "flight_events.log");`
+   - `procedure Write_Event_Line (Event : in Integer; Data : in
+     Air_Data_Type; Ratio : in Float; Risk : in Boolean);`
+   - `procedure Close_Log_File;`
+   - `procedure Echo_Log_File (File_Name : in String :=
+     "flight_events.log");`
+
+   The default file name appears in two places deliberately, so a caller
+   who supplies no argument to either opens and later echoes the same
+   file without repeating the name at every call site.
 4. In the same directory, create `event_file_logging.adb`, withing and
    using `Ada.Text_IO`. Declare `Log_File : File_Type;` at the top of the
    package body. A single file handle, held privately in the body, serves
@@ -65,7 +75,14 @@ ends, takes its place as the record of what occurred.
 9. Write `Echo_Log_File`'s body to open a second, independent `File_Type`
    in `In_File` mode against the same `File_Name`, print a heading, then
    loop `while not End_Of_File (Echo_File) loop`, reading each line with
-   the function form of `Get_Line` and printing it indented. Calling
+   the function form of `Get_Line` and printing it indented. The
+   function form returns an unconstrained `String`, and Ada fixes such an
+   object's bounds from its initial value at the point of declaration;
+   since every line can be a different length, that rules out declaring
+   one `String` before the loop and reusing it on each pass. The
+   reference solution instead opens a nested `declare ... begin ... end;`
+   block on every iteration, declaring a fresh `Line : constant String :=
+   Get_Line (Echo_File);` there, sized to that line alone. Calling
    `Get_Line` again after `End_Of_File` reports true raises
    `Ada.IO_Exceptions.End_Error`; the `while` condition exists precisely
    to keep that call from ever happening. Count the lines read and print
@@ -76,16 +93,16 @@ ends, takes its place as the record of what occurred.
     its call inside `Simulation_Batches`. The array it walked,
     `Event_Log`, keeps accumulating entries exactly as in Module 7;
     only the code that printed the array's contents is gone.
-12. In `Run_Flight_Events`, immediately after the existing calls to
-    `Report_Event`, `Report_Attitude`, and `Report_Posture`, add a call
-    to `Write_Event_Line (Event, Data, Ratio, Risk)`. This call sits
+12. In `Run_Flight_Events`, inside the per-event `declare` block, alongside
+    the existing terminal-reporting calls (`Report_Event`,
+    `Report_Attitude`, `Report_Posture`), add a call to
+    `Write_Event_Line (Event, Data, Ratio, Risk)`. This call sits
     beside, not in place of, the existing `Free_Log_Entry` and
     `Build_Event_Log` calls that populate `Event_Log`; the event now
     reaches the terminal, the file, and the array on every pass through
     the loop.
 13. In the executable part of `flight_deck`, call `Open_Log_File` once,
-    with no argument, immediately before the `Put_Line ("Stall Risk
-    Simulation")` line and before `Simulation_Batches` begins.
+    with no argument, immediately before `Simulation_Batches` begins.
 14. After `Simulation_Batches` ends, call `Close_Log_File`, then
     `Echo_Log_File`, both with no argument, before the final `Put_Line
     ("Simulation complete.")`.
@@ -255,7 +272,7 @@ end Telemetry_Generation;
 package body Telemetry_Generation is
 
    Airspeed_Increment : constant Integer := -50;
-   G_Force_Increment  : constant Float   := 0.5;
+   G_Force_Increment  : constant Float   := 0.1;
    Angle_Increment    : constant Integer := 1;
 
    function Initialize_Telemetry
@@ -297,6 +314,11 @@ package Flight_Reporting is
      (Event : in Integer;
       Risk  : in Boolean;
       Ratio : in Float);
+   procedure Report_Configuration
+     (Aircraft_Weight : in Float;
+      Flight_Mode     : in Flight_Mode_Type;
+      Weapons_Armed   : in Boolean;
+      Data            : in Air_Data_Type);
 
 end Flight_Reporting;
 ```
@@ -354,6 +376,49 @@ package body Flight_Reporting is
          Put_Line("CAUTION - safety ratio " & Float'Image(Ratio));
       end if;
    end Report_Event;
+
+   procedure Report_Configuration
+     (Aircraft_Weight : in Float;
+      Flight_Mode     : in Flight_Mode_Type;
+      Weapons_Armed   : in Boolean;
+      Data            : in Air_Data_Type)
+   is
+      Wing_Loading      : Float;
+      Airspeed_Fraction : Float;
+   begin
+      Put_Line("Cockpit Telemetry Data Set");
+      Put_Line("---------------------------");
+
+      Put_Line("Min Airspeed (kt): " & Integer'Image(Min_Airspeed));
+      Put_Line("Max Airspeed (kt): " & Integer'Image(Max_Airspeed));
+      Put_Line("Min Altitude (ft): " & Integer'Image(Min_Altitude));
+      Put_Line("Max Altitude (ft): " & Integer'Image(Max_Altitude));
+      Put_Line("Min G-Force: " & Float'Image(Min_G_Force));
+      Put_Line("Max G-Force: " & Float'Image(Max_G_Force));
+      Put_Line("Critical Angle Of Attack (deg): " &
+               Integer'Image(Critical_Angle_Of_Attack));
+
+      Put_Line("Wing Area (sq ft): " & Float'Image(Wing_Area));
+      Put_Line("Angle Of Attack (deg): " & Integer'Image(Angle_Of_Attack));
+      Put_Line("Aircraft Weight (lb): " & Float'Image(Aircraft_Weight));
+      Put_Line("Temperature (C): " & Float'Image(Data.Temperature));
+      Put_Line("Current Altitude (ft): " &
+               Integer'Image(Data.Altitude));
+
+      Put_Line("Flight Mode: " & Flight_Mode_Type'Image(Flight_Mode));
+      Put_Line("Weapons Armed: " & Boolean'Image(Weapons_Armed));
+
+      -- Both operands are already Float; no conversion required.
+      Wing_Loading := Aircraft_Weight / Wing_Area;
+      Put_Line("Wing Loading (lb/sq ft): " & Float'Image(Wing_Loading));
+
+      -- Data.Airspeed is Airspeed_Type, an Integer subtype. Max_Airspeed
+      -- is a universal integer. Division against a Float denominator
+      -- requires an explicit Float conversion on the integer operand;
+      -- Ada performs no implicit conversion between numeric types.
+      Airspeed_Fraction := Float(Data.Airspeed) / Float(Max_Airspeed);
+      Put_Line("Airspeed Fraction Of Max: " & Float'Image(Airspeed_Fraction));
+   end Report_Configuration;
 
 end Flight_Reporting;
 ```
@@ -536,14 +601,11 @@ with Flight_Physics;       -- no "use": calls stay qualified below
 
 procedure Flight_Deck is
 
-   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Aircraft_Weight : constant Float := 26_500.0; -- pounds
 
    Flight_Mode : Flight_Mode_Type := Nav;
 
    Weapons_Armed : Boolean := False;
-
-   Wing_Loading      : Float;
-   Airspeed_Fraction : Float;
 
    Event_Count : constant Integer := 8;
 
@@ -587,38 +649,7 @@ procedure Flight_Deck is
    Current_Air_Data : Air_Data_Type := Initialize_Telemetry;
 
 begin
-   Put_Line("Cockpit Telemetry Data Set");
-   Put_Line("---------------------------");
-
-   Put_Line("Min Airspeed (kt): " & Integer'Image(Min_Airspeed));
-   Put_Line("Max Airspeed (kt): " & Integer'Image(Max_Airspeed));
-   Put_Line("Min Altitude (ft): " & Integer'Image(Min_Altitude));
-   Put_Line("Max Altitude (ft): " & Integer'Image(Max_Altitude));
-   Put_Line("Min G-Force: " & Float'Image(Min_G_Force));
-   Put_Line("Max G-Force: " & Float'Image(Max_G_Force));
-   Put_Line("Critical Angle Of Attack (deg): " &
-            Integer'Image(Critical_Angle_Of_Attack));
-
-   Put_Line("Wing Area (sq ft): " & Float'Image(Wing_Area));
-   Put_Line("Angle Of Attack (deg): " & Integer'Image(Angle_Of_Attack));
-   Put_Line("Aircraft Weight (lb): " & Float'Image(Aircraft_Weight));
-   Put_Line("Temperature (C): " & Float'Image(Current_Air_Data.Temperature));
-   Put_Line("Current Altitude (ft): " &
-            Integer'Image(Current_Air_Data.Altitude));
-
-   Put_Line("Flight Mode: " & Flight_Mode_Type'Image(Flight_Mode));
-   Put_Line("Weapons Armed: " & Boolean'Image(Weapons_Armed));
-
-   -- Both operands are already Float; no conversion required.
-   Wing_Loading := Aircraft_Weight / Wing_Area;
-   Put_Line("Wing Loading (lb/sq ft): " & Float'Image(Wing_Loading));
-
-   -- Current_Air_Data.Airspeed is Airspeed_Type, an Integer subtype.
-   -- Max_Airspeed is a universal integer. Division against a Float
-   -- denominator requires an explicit Float conversion on the integer
-   -- operand; Ada performs no implicit conversion between numeric types.
-   Airspeed_Fraction := Float(Current_Air_Data.Airspeed) / Float(Max_Airspeed);
-   Put_Line("Airspeed Fraction Of Max: " & Float'Image(Airspeed_Fraction));
+   Report_Configuration (Aircraft_Weight, Flight_Mode, Weapons_Armed, Current_Air_Data);
 
    Open_Log_File;
 

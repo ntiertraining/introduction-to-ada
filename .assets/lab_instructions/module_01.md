@@ -37,13 +37,23 @@ gnat_native 15.2.1  Default
 
 ## Part 1 — Create the Alire Project
 
-### Step 1.1: Initialize a new workspace named `flight_deck`
+### Step 1.1: Create your own branch
+
+Before making any changes, create and switch to a branch with your name, to keep your work isolated from other students':
+
+```bash
+$ git checkout -b {first-last}
+```
+
+Replace `{first-last}` with your own first and last name (lowercase, hyphenated).
+
+### Step 1.2: Initialize a new workspace named `flight_deck`
 
 Here in VS Code with the *Flight_Deck* project open a terminal
 window in the lower panel.
 Use the following
 command to initialize the Ada project in this project folder.
-The first prompt will ask for the project name, enter *Flight_Deck*.
+The first prompt will ask for the crate name, enter *flight_deck*.
 Take the default values for all the remaining prompts.
 
 ```bash
@@ -82,7 +92,7 @@ The check here is to make sure it runs without errors:
 $ alr run
 ```
 
-### Step 1.2: Write the initialization program
+### Step 1.3: Write the initialization program
 
 Double click the `src/flight_deck.adb` file to open in the editor.
 Replace the contents of the file with this:
@@ -294,12 +304,14 @@ Since `launch.json` will call `alr build` before debugging, add a `tasks.json` a
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "gdb.exe",
+            "miDebuggerPath": "<path-to-your-gdb.exe>",
             "preLaunchTask": "alr-build"
         }
     ]
 }
 ```
+
+> The bare `gdb.exe` does not reliably resolve via `PATH` in this debug configuration on Windows. Find your own `gdb.exe` under `%LOCALAPPDATA%\alire\cache\toolchains\gnat_native_<version>_<hash>\bin\gdb.exe` (run `alr toolchain` to see your installed GNAT version, or just browse that folder) and substitute its full path for `<path-to-your-gdb.exe>` above.
 
 ### macOS — `.vscode/launch.json`
 

@@ -49,37 +49,46 @@ names are specified below and carry forward into later modules.
 3. Inside the declarative part of `flight_deck`, declare the following
    paired constants for airspeed, altitude, and g-force. Use these exact
    names, referenced again in later modules:
-   - `Min_Airspeed : constant := 120` and `Max_Airspeed : constant := 1175`
-   - `Min_Altitude : constant := 300` and `Max_Altitude : constant := 50_000`
-   - `Min_G_Force : constant := -3.0` and `Max_G_Force : constant := 7.3`
-   Declare the critical angle of attack separately as
-   `Critical_Angle_Of_Attack : constant := 15`, since no paired minimum
-   applies to it.
+   - `Min_Airspeed : constant Integer := 120` and
+     `Max_Airspeed : constant Integer := 1175`
+   - `Min_Altitude : constant Integer := 300` and
+     `Max_Altitude : constant Integer := 50_000`
+   - `Min_G_Force : constant Float := -3.0` and
+     `Max_G_Force : constant Float := 7.3`
+   - `Critical_Angle_Of_Attack : constant Integer := 15`, declared
+     separately since no paired minimum applies to it.
 4. Declare three constrained subtypes, using these exact names, referencing
    the paired constants from step 3 rather than repeating literal values:
    - `subtype Airspeed_Type is Integer range Min_Airspeed .. Max_Airspeed`
    - `subtype Altitude_Type is Integer range Min_Altitude .. Max_Altitude`
    - `subtype G_Force_Type is Float range Min_G_Force .. Max_G_Force`
-   Add a short comment above `G_Force_Type` explaining the choice of
-   `Float` over `Integer`.
-5. Declare `Wing_Area : constant Float := 300.0` and
-   `Angle_Of_Attack : constant Integer := 15`.
-6. Declare `Aircraft_Weight : Float := 26_500.0` and
-   `Temperature : Float`. Choose and assign a reasonable starting value
-   for temperature.
+   - Add a short comment above `G_Force_Type` explaining the choice of
+     `Float` over `Integer`.
+5. Declare the following constants:
+   - `Wing_Area : constant Float := 300.0`
+   - `Angle_Of_Attack : constant Integer := 15`
+6. Declare the following:
+   - `Aircraft_Weight : constant Float := 26_500.0`
+   - `Temperature : Float`. Choose and assign a reasonable starting value
+     for temperature.
 7. Declare `type Flight_Mode_Type is (Nav, Dogfight, Landing)` and a
    variable named `Flight_Mode` of that type. Initialize `Flight_Mode`
    to `Nav`.
 8. Declare `Weapons_Armed : Boolean := False`.
 9. Declare working variables of the subtypes from step 4, using these
-   exact names: `Current_Airspeed : Airspeed_Type`,
-   `Current_Altitude : Altitude_Type`, `Current_G_Force : G_Force_Type`.
+   exact names:
+   - `Current_Airspeed : Airspeed_Type`
+   - `Current_Altitude : Altitude_Type`
+   - `Current_G_Force : G_Force_Type`
+
    Assign initial values that fall within each constrained range. Attempt,
    temporarily, to assign a value outside one range and observe the
    compiler or runtime response; remove the out-of-range assignment before
    proceeding.
-10. Declare `Wing_Loading : Float` and `Airspeed_Fraction : Float` to hold
-    the results calculated in steps 11 and 12.
+10. Declare the following, to hold the results calculated in steps 11 and
+    12:
+    - `Wing_Loading : Float`
+    - `Airspeed_Fraction : Float`
 11. In the executable part of the procedure, calculate `Wing_Loading` by
     dividing `Aircraft_Weight` by `Wing_Area`. Both operands are already
     `Float`, so no conversion applies here; note this in a comment as a
@@ -107,19 +116,19 @@ with Ada.Text_IO; use Ada.Text_IO;
 procedure Flight_Deck is
 
    -- Airspeed limits, in knots.
-   Min_Airspeed : constant := 120;
-   Max_Airspeed : constant := 1175;
+   Min_Airspeed : constant Integer := 120;
+   Max_Airspeed : constant Integer := 1175;
 
    -- Altitude limits, in feet.
-   Min_Altitude : constant := 300;
-   Max_Altitude : constant := 50_000;
+   Min_Altitude : constant Integer := 300;
+   Max_Altitude : constant Integer := 50_000;
 
    -- G-force limits. A Float maximum of 7.3 rules out an Integer subtype.
-   Min_G_Force : constant := -3.0;
-   Max_G_Force : constant := 7.3;
+   Min_G_Force : constant Float := -3.0;
+   Max_G_Force : constant Float := 7.3;
 
    -- Critical angle of attack, in degrees. No paired minimum applies.
-   Critical_Angle_Of_Attack : constant := 15;
+   Critical_Angle_Of_Attack : constant Integer := 15;
 
    subtype Airspeed_Type is Integer range Min_Airspeed .. Max_Airspeed;
    subtype Altitude_Type  is Integer range Min_Altitude .. Max_Altitude;
@@ -131,7 +140,7 @@ procedure Flight_Deck is
    Wing_Area       : constant Float   := 300.0; -- square feet
    Angle_Of_Attack : constant Integer := 15;     -- degrees
 
-   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Aircraft_Weight : constant Float := 26_500.0; -- pounds
    Temperature     : Float := 15.0;     -- degrees Celsius, standard day
 
    type Flight_Mode_Type is (Nav, Dogfight, Landing);
@@ -175,8 +184,8 @@ begin
    Wing_Loading := Aircraft_Weight / Wing_Area;
    Put_Line("Wing Loading (lb/sq ft): " & Float'Image(Wing_Loading));
 
-   -- Current_Airspeed is Airspeed_Type, an Integer subtype. Max_Airspeed
-   -- is a universal integer. Division against a Float denominator
+   -- Current_Airspeed is Airspeed_Type, an Integer subtype; Max_Airspeed
+   -- is a plain Integer constant. Division against a Float denominator
    -- requires an explicit Float conversion on the integer operand; Ada
    -- performs no implicit conversion between numeric types.
    Airspeed_Fraction := Float(Current_Airspeed) / Float(Max_Airspeed);

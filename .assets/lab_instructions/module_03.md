@@ -47,7 +47,7 @@ serves the exercise only.
 3. Declare four increment constants, using these exact names, referenced
    again if the increment values change later in the lab:
    - `Airspeed_Increment : constant Integer := -50`
-   - `G_Force_Increment : constant Float := 0.5`
+   - `G_Force_Increment : constant Float := 0.1`
    - `Angle_Increment : constant Integer := 1`
    - `Event_Count : constant Integer := 8`
 4. Declare `Current_Angle_Of_Attack : Integer := 5`. Reuse
@@ -65,14 +65,23 @@ serves the exercise only.
    `In_Flight_Events`, iterating a loop variable named `Event` across
    `1 .. Event_Count`.
 8. Inside `In_Flight_Events`, open a declare block scoped to the single
-   event. Declare, local to the block, `Temperature_Kelvin`,
-   `Air_Density`, `Stall_Speed`, `Safety_Ratio`, all `Float`, and
-   `Stall_Risk`, `Boolean`. Values calculated for one event have no
-   bearing on the next; block scope enforces that boundary.
-9. Within the block, calculate `Temperature_Kelvin`, `Air_Density`, and
-   `Stall_Speed` per the Requirements. Convert `Current_G_Force` and
-   `Air_Density` as needed for the `Sqrt` argument; both already share
-   `Float`, so no conversion applies at this step.
+   event. Declare, local to the block:
+   - `Temperature_Kelvin : Float`
+   - `Air_Density : Float`
+   - `Stall_Speed : Float`
+   - `Safety_Ratio : Float`
+   - `Stall_Risk : Boolean`
+
+   Values calculated for one event have no bearing on the next; block
+   scope enforces that boundary.
+9. Within the block, calculate the following per the Requirements:
+   - `Temperature_Kelvin`
+   - `Air_Density`
+   - `Stall_Speed`
+
+   Convert `Current_G_Force` and `Air_Density` as needed for the `Sqrt`
+   argument; both already share `Float`, so no conversion applies at
+   this step.
 10. Calculate `Safety_Ratio` as `Current_Airspeed` divided by
     `Stall_Speed`. `Current_Airspeed` is `Airspeed_Type`, an `Integer`
     subtype; apply an explicit `Float` conversion before dividing.
@@ -82,16 +91,23 @@ serves the exercise only.
     since the second condition needs no evaluation once the first proves
     true.
 12. Report the event outcome with an `if` statement carrying three
-    branches: `Stall_Risk` true reports a stall warning; `Safety_Ratio`
-    below 1.2 (and `Stall_Risk` false) reports a caution; the remaining
-    case reports nominal margin. Build each message with the `&`
-    concatenation operator rather than multiple `Put_Line` calls.
+    branches:
+    - `Stall_Risk` true reports a stall warning
+    - `Safety_Ratio` below 1.2 (and `Stall_Risk` false) reports a caution
+    - the remaining case reports nominal margin
+
+    Build each message with the `&` concatenation operator rather than
+    multiple `Put_Line` calls.
 13. Below the `if` statement, still inside the block, add a `case`
     statement on `Current_Angle_Of_Attack` that reports an attitude
-    category: `0 .. 10` reports normal, `11 .. 14` reports approaching
-    critical, `15 .. 90` reports critical or beyond, and `when others`
-    reports an invalid reading. The range syntax matches values falling
-    between bounds without an entry for every discrete value.
+    category:
+    - `0 .. 10` reports normal
+    - `11 .. 14` reports approaching critical
+    - `15 .. 90` reports critical or beyond
+    - `when others` reports an invalid reading
+
+    The range syntax matches values falling between bounds without an
+    entry for every discrete value.
 14. Still inside the block, add a second `case` statement on
     `Flight_Mode`, established in Module 2. Group `Nav` and `Landing`
     together with the `|` operator to report a single relaxed-posture
@@ -177,7 +193,7 @@ procedure Flight_Deck is
    Wing_Area       : constant Float   := 300.0; -- square feet
    Angle_Of_Attack : constant Integer := 15;     -- degrees
 
-   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Aircraft_Weight : constant Float := 26_500.0; -- pounds
    Temperature     : Float := 15.0;     -- degrees Celsius, standard day
 
    type Flight_Mode_Type is (Nav, Dogfight, Landing);
@@ -197,7 +213,7 @@ procedure Flight_Deck is
    Base_Stall_Speed : constant Float := 150.0; -- knots, 1g sea level
 
    Airspeed_Increment : constant Integer := -50;
-   G_Force_Increment  : constant Float   := 0.5;
+   G_Force_Increment  : constant Float   := 0.1;
    Angle_Increment    : constant Integer := 1;
    Event_Count        : constant Integer := 8;
 

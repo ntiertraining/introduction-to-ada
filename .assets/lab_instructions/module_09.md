@@ -1,4 +1,4 @@
-<h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; MModule 09: Exception Handling</h1>
+<h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 09: Exception Handling</h1>
 
 ## Goals
 
@@ -35,11 +35,11 @@ program.
    user-defined exception in Ada is its own distinct type, not derived
    from `Ada.Exceptions.Exception_Occurrence` or any other exception;
    declaring one costs nothing beyond the single line.
-3. In `telemetry_generation.adb`, add a `with` clause for
+2. In `telemetry_generation.adb`, add a `with` clause for
    `Ada.Numerics.Float_Random`. Declare `Dropout_Probability : constant
    Float := 0.05;` and `Gen : Ada.Numerics.Float_Random.Generator;` at
    the package body level, above the subprogram bodies.
-4. At the very end of the package body, after the last `end
+3. At the very end of the package body, after the last `end
    Apply_Increments;`, add a `begin ... end Telemetry_Generation;`
    elaboration part containing one statement: `Ada.Numerics.Float_Random.
    Reset (Gen);`. A package body's own elaboration code runs once, the
@@ -47,7 +47,7 @@ program.
    generator needs seeding; seeding inside `Apply_Increments` itself
    would reseed on every call and defeat the randomness it is meant to
    provide.
-5. Rewrite `Apply_Increments`. Before the three increment assignments,
+4. Rewrite `Apply_Increments`. Before the three increment assignments,
    declare `Roll : constant Float := Ada.Numerics.Float_Random.Random
    (Gen);` and test it: `if Roll < Dropout_Probability then raise
    ADIRS_Timeout_Error with "ADIRS dropout triggered (roll " &
@@ -55,15 +55,15 @@ program.
    content a raised exception carries in Ada; embedding the roll value
    in a fixed, readable format is what the Requirements call defining a
    format to carry data in the message.
-6. Open `src/flight_deck.adb`. Add a `with` clause and a `use` clause for
+5. Open `src/flight_deck.adb`. Add a `with` clause and a `use` clause for
    `Ada.Exceptions`. Add a `with` clause for `Ada.IO_Exceptions`, without
    a paired `use` clause; its two exceptions, `Name_Error` and
    `Use_Error`, appear in handlers below written out with the package
    name, in the same spirit `Flight_Physics` calls stayed qualified
    in Module 7.
-7. Add `Timeout_Threshold : constant Natural := 3;` near the existing
+6. Add `Timeout_Threshold : constant Natural := 3;` near the existing
    `Event_Count` declaration.
-8. Restructure `Run_Flight_Events`'s loop body. Move the call to
+7. Restructure `Run_Flight_Events`'s loop body. Move the call to
    `Apply_Increments (Data)` to the first statement inside the `for
    Event in 1 .. Event_Count loop`, ahead of the existing `declare` block
    that computes `Ratio` and `Risk`. This reorders the cycle to match
@@ -72,12 +72,12 @@ program.
    reporting, and logging, have anything to work with. The Module 8
    ordering, where the increment ran last, has no natural place for a
    failed reading to skip the event it belongs to; this ordering does.
-9. Wrap the `Apply_Increments` call and the `declare` block that follows
+8. Wrap the `Apply_Increments` call and the `declare` block that follows
    it in an inner `begin ... exception ... end;`, nested inside the `for
    Event` loop, distinct from the loop itself. Declare `Timeout_Count :
    Natural := 0;` once, before the loop, so it accumulates across the
    whole batch rather than resetting every event.
-10. Add one handler: `when Error : ADIRS_Timeout_Error =>`. Increment
+9. Add one handler: `when Error : ADIRS_Timeout_Error =>`. Increment
     `Timeout_Count`. Report the event number and `Exception_Message
     (Error)` to the terminal as the error message the Requirements call
     for. No call to `Write_Event_Line`, `Free_Log_Entry`, or
@@ -89,28 +89,31 @@ program.
     a comment made back in Module 3: Ada has no `continue` statement, but
     an exception handler that finishes without re-raising produces the
     same effect for the iteration it was raised in.
-11. Inside that same handler, after reporting the message, test
+10. Inside that same handler, after reporting the message, test
     `Timeout_Count >= Timeout_Threshold`. When true, report that the
     threshold was reached, then execute a bare `raise;` with no
     exception name. A bare `raise` inside a handler re-raises the
     exception currently being handled, `ADIRS_Timeout_Error` in this
     case, preserving its original message, and sends it looking for a
     handler further out, past `Run_Flight_Events` entirely.
-12. In the executable part of `flight_deck`, wrap the existing call to
-    `Open_Log_File` in its own `begin ... exception ... end;`. Add one
-    handler covering both exceptions at once: `when Error :
-    Ada.IO_Exceptions.Name_Error | Ada.IO_Exceptions.Use_Error =>`,
-    grouped with `|` since both indicate the file could not be created
-    and both call for the same response here. Declare a small procedure,
-    `Log_Fatal_Error (Context : in String; Error : in
-    Exception_Occurrence)`, ahead of the executable part, printing
-    `Context`, `Exception_Name (Error)`, and `Exception_Message (Error)`
-    together; `Exception_Name` is what lets a single handler covering two
-    exceptions report which one actually fired. Call `Log_Fatal_Error`
-    from the `Open_Log_File` handler, then execute a bare `return;`,
-    ending the procedure immediately; without a log file, none of what
-    follows can do what this program exists to do.
-13. Wrap `Simulation_Batches` and the two calls immediately after it,
+11. In the executable part of `flight_deck`, wrap the existing call to
+    `Open_Log_File` in its own `begin ... exception ... end;`.
+    - Add one handler covering both exceptions at once: `when Error :
+      Ada.IO_Exceptions.Name_Error | Ada.IO_Exceptions.Use_Error =>`,
+      grouped with `|` since both indicate the file could not be
+      created and both call for the same response here.
+    - Declare a small procedure, `Log_Fatal_Error (Context : in
+      String; Error : in Exception_Occurrence)`, ahead of the
+      executable part, printing `Context`, `Exception_Name (Error)`,
+      and `Exception_Message (Error)` together; `Exception_Name` is
+      what lets a single handler covering two exceptions report which
+      one actually fired.
+    - Call `Log_Fatal_Error` from the `Open_Log_File` handler, then
+      execute a bare `return;`, ending the procedure immediately.
+
+    Without a log file, none of what follows can do what this program
+    exists to do.
+12. Wrap `Simulation_Batches` and the two calls immediately after it,
     `Close_Log_File` and `Echo_Log_File`, in one more `begin ...
     exception ... end;`. Add a handler, `when Error : ADIRS_Timeout_Error
     =>`, calling `Log_Fatal_Error ("Repeated ADIRS timeouts forced an
@@ -120,15 +123,15 @@ program.
     `Put_Line ("Simulation complete.")` afterward and ends normally,
     rather than terminating on an unhandled exception with no message a
     person watching the terminal could act on.
-14. Open `event_file_logging.adb`. Add a `with` clause for
+13. Open `event_file_logging.adb`. Add a `with` clause for
     `Ada.IO_Exceptions`, unqualified use omitted for the same reason as
-    step 6. Leave `Open_Log_File` exactly as Module 8 left it, with no
+    step 5. Leave `Open_Log_File` exactly as Module 8 left it, with no
     exception handling of its own. A reusable I/O package generally
     should not decide, on the caller's behalf, what a failure to create a
     file means for the rest of the program; that decision belongs to
-    whatever called `Open_Log_File`, which is exactly what step 12
+    whatever called `Open_Log_File`, which is exactly what step 11
     handles.
-15. In `Echo_Log_File`, add `exception when Ada.IO_Exceptions.Name_Error
+14. In `Echo_Log_File`, add `exception when Ada.IO_Exceptions.Name_Error
     => Put_Line ("Log file '" & File_Name & "' could not be reopened for
     review; skipping echo.");` after the existing body. Unlike
     `Open_Log_File`, this failure has one sensible response regardless of
@@ -136,19 +139,19 @@ program.
     that single, context-independent response is exactly the case where
     handling inside the package, rather than at the call site, makes
     sense.
-16. Compile and run the program several times. Most runs complete with
+15. Compile and run the program several times. Most runs complete with
     zero or one ADIRS timeout message and finish normally. To exercise
     the escalation path deliberately, temporarily change
     `Dropout_Probability` to `0.5`, rerun, and confirm the program logs
     three timeout messages, reports the threshold reached, and ends
     through the `Simulation_Batches` handler rather than reaching
     `Echo_Log_File`. Restore `Dropout_Probability` to `0.05` afterward.
-17. Set a breakpoint on the `raise;` statement inside
+16. Set a breakpoint on the `raise;` statement inside
     `Run_Flight_Events`'s handler. With `Dropout_Probability` still
     raised for testing, launch the debugger and confirm `Timeout_Count`
     reads at least `Timeout_Threshold` when the breakpoint is reached.
     Step forward and watch execution leave `Run_Flight_Events` entirely,
-    landing in the handler added in step 13.
+    landing in the handler added in step 12.
 
 ## Notes
 
@@ -164,7 +167,7 @@ program.
 - `ADIRS_Timeout_Error` carries no data beyond its message text; Ada
   gives a user-defined exception nothing else to set. Any additional
   detail belongs in that message, formatted consistently, exactly as
-  step 5 does with the roll value.
+  step 4 does with the roll value.
 - Write_Event_Line and Close_Log_File receive no exception handling of
   their own in this lab. Both can raise, most plausibly
   `Ada.IO_Exceptions.Device_Error` from a full or failing disk, but that
@@ -174,7 +177,7 @@ program.
   handler around the whole simulation would be the natural next step if
   this program needed to survive that case gracefully, left for whenever
   the course revisits robustness in more depth.
-- The reordering in step 8 changes what Event 1 reports compared to
+- The reordering in step 7 changes what Event 1 reports compared to
   Module 8: it now reflects one increment applied before its first
   report, rather than the unmodified starting values. This is a
   deliberate consequence of making the exception's placement meaningful,
@@ -303,7 +306,7 @@ with Ada.Numerics.Float_Random;
 package body Telemetry_Generation is
 
    Airspeed_Increment : constant Integer := -50;
-   G_Force_Increment  : constant Float   := 0.5;
+   G_Force_Increment  : constant Float   := 0.1;
    Angle_Increment    : constant Integer := 1;
 
    -- Simulated ADIRS dropout probability, checked once per increment
@@ -354,6 +357,11 @@ package Flight_Reporting is
 
    procedure Report_Attitude (Data : in Air_Data_Type);
    procedure Report_Posture (Mode : in Flight_Mode_Type);
+   procedure Report_Configuration
+     (Aircraft_Weight : in Float;
+      Flight_Mode     : in Flight_Mode_Type;
+      Weapons_Armed   : in Boolean;
+      Data            : in Air_Data_Type);
    procedure Report_Event (Event : in Integer; Risk : in Boolean);
    procedure Report_Event
      (Event : in Integer;
@@ -393,6 +401,49 @@ package body Flight_Reporting is
             Put_Line("  Posture: combat");
       end case;
    end Report_Posture;
+
+   procedure Report_Configuration
+     (Aircraft_Weight : in Float;
+      Flight_Mode     : in Flight_Mode_Type;
+      Weapons_Armed   : in Boolean;
+      Data            : in Air_Data_Type) is
+
+      Wing_Loading      : Float;
+      Airspeed_Fraction : Float;
+
+   begin
+      Put_Line("Cockpit Telemetry Data Set");
+      Put_Line("---------------------------");
+
+      Put_Line("Min Airspeed (kt): " & Integer'Image(Min_Airspeed));
+      Put_Line("Max Airspeed (kt): " & Integer'Image(Max_Airspeed));
+      Put_Line("Min Altitude (ft): " & Integer'Image(Min_Altitude));
+      Put_Line("Max Altitude (ft): " & Integer'Image(Max_Altitude));
+      Put_Line("Min G-Force: " & Float'Image(Min_G_Force));
+      Put_Line("Max G-Force: " & Float'Image(Max_G_Force));
+      Put_Line("Critical Angle Of Attack (deg): " &
+               Integer'Image(Critical_Angle_Of_Attack));
+
+      Put_Line("Wing Area (sq ft): " & Float'Image(Wing_Area));
+      Put_Line("Angle Of Attack (deg): " & Integer'Image(Angle_Of_Attack));
+      Put_Line("Aircraft Weight (lb): " & Float'Image(Aircraft_Weight));
+      Put_Line("Temperature (C): " & Float'Image(Data.Temperature));
+      Put_Line("Current Altitude (ft): " & Integer'Image(Data.Altitude));
+
+      Put_Line("Flight Mode: " & Flight_Mode_Type'Image(Flight_Mode));
+      Put_Line("Weapons Armed: " & Boolean'Image(Weapons_Armed));
+
+      -- Both operands are already Float; no conversion required.
+      Wing_Loading := Aircraft_Weight / Wing_Area;
+      Put_Line("Wing Loading (lb/sq ft): " & Float'Image(Wing_Loading));
+
+      -- Data.Airspeed is Airspeed_Type, an Integer subtype. Max_Airspeed
+      -- is a universal integer. Division against a Float denominator
+      -- requires an explicit Float conversion on the integer operand;
+      -- Ada performs no implicit conversion between numeric types.
+      Airspeed_Fraction := Float(Data.Airspeed) / Float(Max_Airspeed);
+      Put_Line("Airspeed Fraction Of Max: " & Float'Image(Airspeed_Fraction));
+   end Report_Configuration;
 
    procedure Report_Event (Event : in Integer; Risk : in Boolean) is
    begin
@@ -609,14 +660,11 @@ with Flight_Physics;       -- no "use": calls stay qualified below
 
 procedure Flight_Deck is
 
-   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Aircraft_Weight : constant Float := 26_500.0; -- pounds
 
    Flight_Mode : Flight_Mode_Type := Nav;
 
    Weapons_Armed : Boolean := False;
-
-   Wing_Loading      : Float;
-   Airspeed_Fraction : Float;
 
    Event_Count       : constant Integer := 8;
    Timeout_Threshold : constant Natural := 3;
@@ -686,38 +734,8 @@ procedure Flight_Deck is
    Current_Air_Data : Air_Data_Type := Initialize_Telemetry;
 
 begin
-   Put_Line("Cockpit Telemetry Data Set");
-   Put_Line("---------------------------");
-
-   Put_Line("Min Airspeed (kt): " & Integer'Image(Min_Airspeed));
-   Put_Line("Max Airspeed (kt): " & Integer'Image(Max_Airspeed));
-   Put_Line("Min Altitude (ft): " & Integer'Image(Min_Altitude));
-   Put_Line("Max Altitude (ft): " & Integer'Image(Max_Altitude));
-   Put_Line("Min G-Force: " & Float'Image(Min_G_Force));
-   Put_Line("Max G-Force: " & Float'Image(Max_G_Force));
-   Put_Line("Critical Angle Of Attack (deg): " &
-            Integer'Image(Critical_Angle_Of_Attack));
-
-   Put_Line("Wing Area (sq ft): " & Float'Image(Wing_Area));
-   Put_Line("Angle Of Attack (deg): " & Integer'Image(Angle_Of_Attack));
-   Put_Line("Aircraft Weight (lb): " & Float'Image(Aircraft_Weight));
-   Put_Line("Temperature (C): " & Float'Image(Current_Air_Data.Temperature));
-   Put_Line("Current Altitude (ft): " &
-            Integer'Image(Current_Air_Data.Altitude));
-
-   Put_Line("Flight Mode: " & Flight_Mode_Type'Image(Flight_Mode));
-   Put_Line("Weapons Armed: " & Boolean'Image(Weapons_Armed));
-
-   -- Both operands are already Float; no conversion required.
-   Wing_Loading := Aircraft_Weight / Wing_Area;
-   Put_Line("Wing Loading (lb/sq ft): " & Float'Image(Wing_Loading));
-
-   -- Current_Air_Data.Airspeed is Airspeed_Type, an Integer subtype.
-   -- Max_Airspeed is a universal integer. Division against a Float
-   -- denominator requires an explicit Float conversion on the integer
-   -- operand; Ada performs no implicit conversion between numeric types.
-   Airspeed_Fraction := Float(Current_Air_Data.Airspeed) / Float(Max_Airspeed);
-   Put_Line("Airspeed Fraction Of Max: " & Float'Image(Airspeed_Fraction));
+   Report_Configuration (Aircraft_Weight, Flight_Mode, Weapons_Armed,
+                          Current_Air_Data);
 
    begin
       Open_Log_File;

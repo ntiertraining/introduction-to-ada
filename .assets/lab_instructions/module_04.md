@@ -61,15 +61,19 @@ to an enclosing variable.
    `Airspeed_Increment`, `G_Force_Increment`, and `Angle_Increment`
    directly inside the body without passing them as parameters; their
    values never change during a run, so passing them adds nothing.
-8. Declare a procedure named `Initialize_Telemetry`, taking
-   `Airspeed : out Airspeed_Type`, `G_Force : out G_Force_Type`,
-   `Angle_Of_Attack : out Integer`, followed by three additional
-   parameters carrying default values: `Starting_Airspeed : Airspeed_Type
-   := 900`, `Starting_G_Force : G_Force_Type := 1.0`, and
-   `Starting_Angle : Integer := 5`. Assign each `out` parameter from its
-   corresponding default parameter in the body. A caller supplying no
-   extra arguments gets the values above; a caller wishing to start a
-   batch at different conditions may override one or more explicitly.
+8. Declare a procedure named `Initialize_Telemetry`, taking the following
+   parameters:
+   - `Airspeed : out Airspeed_Type`
+   - `G_Force : out G_Force_Type`
+   - `Angle_Of_Attack : out Integer`
+   followed by three additional parameters carrying default values:
+   - `Starting_Airspeed : Airspeed_Type := 900`
+   - `Starting_G_Force : G_Force_Type := 1.0`
+   - `Starting_Angle : Integer := 5`
+   Assign each `out` parameter from its corresponding default parameter in
+   the body. A caller supplying no extra arguments gets the values above; a
+   caller wishing to start a batch at different conditions may override one
+   or more explicitly.
 9. Declare a procedure named `Run_Flight_Events`, taking
    `Airspeed : in out Airspeed_Type`, `G_Force : in out G_Force_Type`, and
    `Angle_Of_Attack : in out Integer`. Move the `In_Flight_Events` `for`
@@ -165,7 +169,7 @@ procedure Flight_Deck is
    Wing_Area       : constant Float   := 300.0; -- square feet
    Angle_Of_Attack : constant Integer := 15;     -- degrees
 
-   Aircraft_Weight : Float := 26_500.0; -- pounds
+   Aircraft_Weight : constant Float := 26_500.0; -- pounds
    Temperature     : Float := 15.0;     -- degrees Celsius, standard day
 
    type Flight_Mode_Type is (Nav, Dogfight, Landing);
@@ -183,7 +187,7 @@ procedure Flight_Deck is
    Base_Stall_Speed : constant Float := 150.0; -- knots, 1g sea level
 
    Airspeed_Increment : constant Integer := -50;
-   G_Force_Increment  : constant Float   := 0.5;
+   G_Force_Increment  : constant Float   := 0.1;
    Angle_Increment    : constant Integer := 1;
    Event_Count        : constant Integer := 8;
 
