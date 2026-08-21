@@ -2,9 +2,7 @@
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
     "editor.minimap.enabled": false,
-    "workbench.startupEditor": "readme",
-    "workbench.editorAssociations": {
-        "*.md": "vscode.markdown.preview.editor"
-    },
-    "workbench.secondarySideBar.defaultVisibility": "hidden"
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "sarif-viewer.connectToGithubCodeScanning": "off",
+    "workbench.startupEditor": "readme"
 }

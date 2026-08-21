@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 2: Basic Syntax and Data Types</h1>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -34,7 +34,7 @@ names are specified below and carry forward into later modules.
 - Add a boolean variable representing weapon systems safety status. `True`
   indicates armed, `False` indicates safe. Initialize to safe.
 - Perform at least one calculation requiring an explicit type conversion
-  between an `Integer`-based subtype and a `Float` value. Wing loading
+  between a `Integer`-based subtype and a `Float` value. Wing loading
   (weight divided by wing area) satisfies this requirement, as does any
   ratio built from the airspeed subtype and a `Float` denominator.
 - Output every constant and variable to the terminal with a labeled
@@ -64,7 +64,7 @@ names are specified below and carry forward into later modules.
    - `subtype G_Force_Type is Float range Min_G_Force .. Max_G_Force`
    Add a short comment above `G_Force_Type` explaining the choice of
    `Float` over `Integer`.
-5. Declare `Wing_Area : constant Float := 300.0` and
+5. Assign `Wing_Area : constant Float := 300.0` and
    `Angle_Of_Attack : constant Integer := 15`.
 6. Declare `Aircraft_Weight : Float := 26_500.0` and
    `Temperature : Float`. Choose and assign a reasonable starting value
@@ -106,7 +106,8 @@ names are specified below and carry forward into later modules.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
+
 
 ## Solution
 

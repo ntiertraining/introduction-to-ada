@@ -18,10 +18,10 @@ Some may already be installed and configured.
         <li>Click the package in the results list, and in the main window describing the extension click the button to install it.
     </ol>
 
-1. For Microsoft Windows only use winget to install *Git* and the Ada package manager *Alire* ($ is the command prompt):
-    ```powershell
+1. For Microsoft Windows only: use winget to install *Git* and the Ada package manager *Alire* ($ is the command prompt):
+    ```bash
     $ winget install --id Git.Git -e --source winget
-    $ winget install Alire.Alire
+    $ winget install Alire.Alire   # alternative: use winget install AdaLang.Alire.Portable
     ```
 
 1. For Apple macOS and Linux install the Ada package manager *Alire*.
@@ -115,3 +115,4 @@ Some may already be installed and configured.
     ```bash
     $ code .
     ```
+    Note: VS Code may be launched from the GUI as well, just open find and open the flight_deck folder.

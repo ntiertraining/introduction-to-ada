@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png" />&nbsp;&nbsp;Module 01 Lab: Initial Flight Check</h1>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Topic
 
@@ -86,7 +86,7 @@ $ alr run
 
 ### Step 1.2: Write the initialization program
 
-Double click the `src/flight_deck.adb` file to open in the editor.
+Double-click the `src/flight_deck.adb` file to open in the editor.
 Replace the contents of the file with this:
 
 ```ada
@@ -159,7 +159,7 @@ If you see the initialization message, your command-line toolchain (GNAT + Alire
 
 In VS Code, open the Extensions panel (`Ctrl+Shift+X` / `Cmd+Shift+X`) and install:
 
-- **Ada** by AdaCore (extension id: `AdaCore.ada`)
+- **Ada** by AdaCore (extension ID: `AdaCore.ada`)
 
 This provides syntax highlighting, the Ada Language Server (ALS) for navigation/hover/errors, and debugging integration.
 
@@ -437,4 +437,4 @@ Click the red dot again to remove it, or right-click it and choose **Disable Bre
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>

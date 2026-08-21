@@ -4,9 +4,7 @@
 # fixes the Linux release used.
 
 FROM mcr.microsoft.com/devcontainers/base:ubuntu
-
 ENV DEBIAN_FRONTEND=noninteractive
-
 WORKDIR /workspace
 
 # Install system dependencies required for building and unpacking Ada tooling
@@ -42,5 +40,3 @@ RUN arch_output=$(dpkg --print-architecture) \
     else \
         echo "unsupported architecture" && exit 1; \
     fi
-
-WORKDIR /workspace

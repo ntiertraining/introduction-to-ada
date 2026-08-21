@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 3: Control Structures and Operators</h1>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -17,7 +17,7 @@ serves the exercise only.
 - Calculate temperature in Kelvin from the existing `Temperature` variable:
   `Tk = Temperature + 273.15`.
 - Calculate air density as `288.15 / Tk`.
-- Calculate stall speed as a base stall speed multiplied by the square root
+- Resolve stall speed as a base stall speed multiplied by the square root
   of current g-force divided by air density.
 - Calculate a safety ratio as current airspeed divided by stall speed.
 - Determine stall risk as true when the safety ratio falls below 1.0, or
@@ -65,7 +65,7 @@ serves the exercise only.
 7. Inside `Simulation_Batches`, build an inner `for` loop, labeled
    `In_Flight_Events`, iterating a loop variable named `Event` across
    `1 .. Event_Count`.
-8. Inside `In_Flight_Events`, open a declare block scoped to the single
+8. Inside `In_Flight_Events`, open a *declare* block scoped to the single
    event. Declare, local to the block, `Temperature_Kelvin`,
    `Air_Density`, `Stall_Speed`, `Safety_Ratio`, all `Float`, and
    `Stall_Risk`, `Boolean`. Values calculated for one event have no
@@ -101,7 +101,7 @@ serves the exercise only.
     `Current_Airspeed`, `Current_G_Force`, and `Current_Angle_Of_Attack`
     by their respective increment constants.
 16. Close `In_Flight_Events`. Immediately after, prompt for terminal
-    input asking whether to run another batch. Open a declare block
+    input asking whether to run another batch. Open a *declare* block
     scoped to the prompt. Declare a one-character `String` and a
     `Natural` for the count of characters read. Read the response with
     `Get_Line`. Assign `Continue_Simulation` true only when a character
@@ -128,7 +128,7 @@ serves the exercise only.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Notes
 

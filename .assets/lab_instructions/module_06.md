@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 06: Composite Types (Records and Arrays)</h1>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -112,7 +112,7 @@ data, rather than only re-printing what Module 5 already stored.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Notes
 
@@ -123,7 +123,7 @@ data, rather than only re-printing what Module 5 already stored.
   `new`, so the broader reach of `access all` would add a capability
   nothing here exercises.
 
-  access parameter deliberately, to show a named access type promoting
+- An anonymous access parameter deliberately, to show a named access type promoting
   into it without ceremony. Every other access-typed parameter in this
   lab could have used the anonymous form as well; `Event_Log_Access`
   appears by name elsewhere mainly so the array declaration and the

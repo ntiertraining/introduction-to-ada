@@ -5,21 +5,43 @@
 ![Banner Light](./.assets/images/banner-introduction-to-ada-light.png#gh-light-mode-only)
 ![banner Dark](./.assets/images/banner-introduction-to-ada-dark.png#gh-dark-mode-only)
 
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
+
 # Introduction
 
 This is the lab project repository for the nTier Training course *"Introduction to Ada"*.
-This course uses Visual Studio Code as the integrated development environment (IDE) with Alire (alr) and GNAT as the build tools.
+This course uses Visual Studio Code as the integrated development environment (IDE) with Alire for package management and GNAT for the build tools.
 The first module focuses are creating an Ada project in the workspace and running the program.
 The subsequent modules add to the project in the same workspace moving forward.
 
-There are three ways to initialize the development environment:
+There are four ways to initialize and use the development environment.
+Pick the one which best serves your needs:
 
-* Setup for a Local Development Computer [follow the instructions on this page](./.assets/lab_instructions/local-install.md)
-* Clone this project onto a local computer with Docker, open the folder in VS Code, and use the *Dev Containers: Reopen in Container* command to launch the project in a local Docker container.
-* Follow [this link](https://codespaces.new/ntiertraining/introduction-to-ada) or click the green *Code* button on the GitHub page, select the Codespaces tab, and click the green button to *Create codespace on main* (launches a Docker container on GitHub's servers).
-Signing into GitHub with a personal account first is required to launch a codespace; using an organization account is discouraged.
+<div style="margin-left: 20px;"><b>Run on a local computer:</b>
+    <div style="margin-left: 20px;">Setup for a Local Development Computer:
+    <a href="./.assets/lab_instructions/local-install.md">follow the instructions on this page</a></div></div><br>
 
-Once the development environment is ready use the following links for the lab instructions:
+<div style="margin-left: 20px;"><b>Run in a local Docker container:</b>
+    <div style="margin-left: 20px;">Clone this project onto a local computer with Docker, open the folder in VS Code,
+    and use the <i>Dev Containers: Reopen in Container</i> command to launch the project in a local Docker container.</div></div><br>
+
+<div style="margin-left: 20px;"><b>Run in a GitHub Codespace (a Docker container on GitHub's servers):</b>
+    <div style="margin-left: 20px;">When signed onto GitHub with a personal account, and with this repository open in GitHub,
+    follow <a href="https://codespaces.new/ntiertraining/introduction-to-ada">this link</a>
+    or click the green *Code* button on the GitHub page, select the Codespaces tab,
+    and click the green button to <i>Create codespace on main</i>.
+    Running this from a personal account is required to launch the Codespace.
+    Warning: any work you do will be lost of the Codespace is deleted.</div></div><br>
+
+<div style="margin-left: 20px;"><b>Run in a Google Cloud Shell: (a Docker container on Google's servers)</b>
+    <div style="margin-left: 20px;">When signed onto Google with a personal account, and with this repository open in GitHub,
+    click <a href="https://shell.cloud.google.com/cloudshell/editor?git_repo=https://github.com/ntiertraining/introduction-to-ada">this link</a>.
+    Running this from a personal account is required to launch the Cloud Shell.
+    Warning: any work you do will be lost of the Codespace is deleted.</div></div><br>
+
+When the development environment is ready, VS Code will always display this README file for the
+newly opened workspace, so you are placed right back here to start.
+In the newly opened workspace use the following links for the lab instructions:
 
 # Module Lab Instructions
 

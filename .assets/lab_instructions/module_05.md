@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 05: Modular Programming</h1>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -16,10 +16,10 @@ event occurred.
 
 - Define a record type containing airspeed, altitude, g-force,
   temperature, and angle of attack.
-- Define a second record type pairing one instance of the air-data record
+- Create a second record type pairing one instance of the air-data record
   with its calculated safety ratio and stall-risk flag, forming a single
-  loggable event.
-- Define a fixed-size, single-dimensional array type of the event-log
+  event to log.
+- Build a fixed-size, single-dimensional array type of the event-log
   record, sized to the existing event count, and declare one array
   variable of that type.
 - Populate the array during the in-flight event loop, one entry per
@@ -89,7 +89,7 @@ event occurred.
     Safety_Ratio => Ratio, Stall_Risk => Risk)` before the call to
     `Apply_Increments`. The assignment copies the current state of `Data`
     into the array; the copy holds steady even after `Apply_Increments`
-    changes `Data` on the next line. Replace the call to `Report_Attitude`
+    changes `Data` on the next line. Replace the call to `Report_Attitude`,
     so it passes `Data` rather than a bare angle value.
 14. In the executable part of `flight_deck`, declare
     `Current_Air_Data : Air_Data_Type := Initialize_Telemetry;` in place
@@ -125,7 +125,8 @@ event occurred.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
+
 
 ## Notes
 

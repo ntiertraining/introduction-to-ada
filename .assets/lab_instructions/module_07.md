@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 07: Exceptions and Error Handling</h1>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -20,7 +20,7 @@ wraps that data and its computed results into a loggable object.
   of that specification.
 - Keep a subprogram that generates air data distinct from a subprogram
   that packages air data and a computed result into a loggable object.
-- Update the GNAT project file so the build locates source files no
+- Update the GNAT project file, so the build locates source files no
   longer sitting in a single flat directory.
 
 ## Instructions
@@ -141,7 +141,7 @@ wraps that data and its computed results into a loggable object.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Notes
 

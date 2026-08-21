@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 04: Subprograms</h1>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -14,7 +14,7 @@ to an enclosing variable.
 
 - Move the starting values for airspeed, g-force, and angle of attack into
   a subprogram.
-- Move the per-event increment of airspeed, g-force, and angle of attack
+- Relocate the per-event increment of airspeed, g-force, and angle of attack
   into a subprogram.
 - Move the finite in-flight event loop into a subprogram.
 - Have the main procedure call the initialization subprogram, then the
@@ -51,7 +51,7 @@ to an enclosing variable.
      one-line NOMINAL or STALL WARNING message with no ratio detail.
    - `Report_Event (Event : in Integer; Risk : in Boolean; Ratio : in Float)`
      prints the same message with the safety ratio appended, and prints
-     CAUTION rather than NOMINAL when `Risk` is false but the ratio still
+     CAUTION rather than NOMINAL when `Risk` is false, but the ratio still
      runs close to the threshold.
    Ada resolves which `Report_Event` applies from the number and type of
    arguments supplied at the call site; no separate name is needed for
@@ -111,7 +111,7 @@ to an enclosing variable.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-[Return to list of module lab instructions](/README.md#module-lab-instructions)
+<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Notes
 

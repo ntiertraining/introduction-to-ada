@@ -1,6 +1,8 @@
 {
     "name": "Introduction to Ada: Flight Deck",
-    "dockerFile": "Dockerfile",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "customizations": {
         "vscode": {
             "extensions": ["AdaCore.ada", "adaCore.language-server"]
