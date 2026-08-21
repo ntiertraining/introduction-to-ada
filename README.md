@@ -30,8 +30,8 @@ Pick the one which best serves your needs:
     follow <a href="https://codespaces.new/ntiertraining/introduction-to-ada">this link</a>
     or click the green *Code* button on the GitHub page, select the Codespaces tab,
     and click the green button to <i>Create codespace on main</i>.
-    Running this from a personal account is required to launch the Codespace.
-    Warning: any work you do will be lost of the Codespace is deleted.</blockquote><br>
+    Running this from a personal GitHub account is required to launch the Codespace.
+    Warning: any work you do will be lost if the Codespace is deleted.</blockquote><br>
 
 <!-- <blockquote><b>Run in a Google Cloud Shell: (a Docker container on Google's servers)</b><br>
     When signed onto Google with a personal account, and with this repository open in GitHub,
