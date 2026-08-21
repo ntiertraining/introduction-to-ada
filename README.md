@@ -33,11 +33,11 @@ Pick the one which best serves your needs:
     Running this from a personal GitHub account is required to launch the Codespace.
     Warning: any work you do will be lost if the Codespace is deleted.</blockquote><br>
 
-<!-- <blockquote><b>Run in a Google Cloud Shell: (a Docker container on Google's servers)</b><br>
+<blockquote><b>Run in a Google Cloud Shell: (a Docker container on Google's servers)</b><br>
     When signed onto Google with a personal account, and with this repository open in GitHub,
-    click <a href="https://shell.cloud.google.com/cloudshell/editor?git_repo=https://github.com/ntiertraining/introduction-to-ada">this link</a>.
+    click <a href="https://www.google.com/search?q=https://shell.cloud.google.com/cloudshell/editor%3Fcloudshell_git_repo%3Dhttps://github.com/ntiertraining/introduction-to-ada%26cloudshell_workspace%3Dintroduction-to-ada">this link</a>.
     Running this from a personal account is required to launch the Cloud Shell.
-    Warning: any work you do will be lost of the Codespace is deleted.</blockquote><br> -->
+    Warning: any work you do will be lost of the Codespace is deleted.</blockquote><br>
 
 When the development environment is ready, VS Code will always display this README file for the
 newly opened workspace, so you are placed right back here to start.
