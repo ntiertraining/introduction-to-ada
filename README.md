@@ -14,30 +14,30 @@ This course uses Visual Studio Code as the integrated development environment (I
 The first module focuses are creating an Ada project in the workspace and running the program.
 The subsequent modules add to the project in the same workspace moving forward.
 
-There are four ways to initialize and use the development environment.
+There are three ways to initialize and use the development environment.
 Pick the one which best serves your needs:
 
-<blockquote><b>Run on a local computer:</b>
-    <blockquote>Setup for a Local Development Computer:
-    <a href="./.assets/lab_instructions/local-install.md">follow the instructions on this page</a></blockquote></blockquote><br>
+<blockquote><b>Run on a local computer:</b><br>
+    Setup for a Local Development Computer:
+    <a href="./.assets/lab_instructions/local-install.md">follow the instructions on this page</a></blockquote><br>
 
-<blockquote><b>Run in a local Docker container:</b>
-    <blockquote>Clone this project onto a local computer with Docker, open the folder in VS Code,
-    and use the <i>Dev Containers: Reopen in Container</i> command to launch the project in a local Docker container.</blockquote></blockquote><br>
+<blockquote><b>Run in a local Docker container:</b><br>
+    Clone this project onto a local computer with Docker, open the folder in VS Code,
+    and use the <i>Dev Containers: Reopen in Container</i> command to launch the project in a local Docker container.</blockquote><br>
 
-<blockquote><b>Run in a GitHub Codespace (a Docker container on GitHub's servers):</b>
-    <blockquote>When signed onto GitHub with a personal account, and with this repository open in GitHub,
+<blockquote><b>Run in a GitHub Codespace (a Docker container on GitHub's servers):</b><br>
+    When signed onto GitHub with a personal account, and with this repository open in GitHub,
     follow <a href="https://codespaces.new/ntiertraining/introduction-to-ada">this link</a>
     or click the green *Code* button on the GitHub page, select the Codespaces tab,
     and click the green button to <i>Create codespace on main</i>.
     Running this from a personal account is required to launch the Codespace.
-    Warning: any work you do will be lost of the Codespace is deleted.</blockquote></blockquote><br>
+    Warning: any work you do will be lost of the Codespace is deleted.</blockquote><br>
 
-<!-- <blockquote><b>Run in a Google Cloud Shell: (a Docker container on Google's servers)</b>
-    <blockquote>When signed onto Google with a personal account, and with this repository open in GitHub,
+<!-- <blockquote><b>Run in a Google Cloud Shell: (a Docker container on Google's servers)</b><br>
+    When signed onto Google with a personal account, and with this repository open in GitHub,
     click <a href="https://shell.cloud.google.com/cloudshell/editor?git_repo=https://github.com/ntiertraining/introduction-to-ada">this link</a>.
     Running this from a personal account is required to launch the Cloud Shell.
-    Warning: any work you do will be lost of the Codespace is deleted.</blockquote></blockquote><br> -->
+    Warning: any work you do will be lost of the Codespace is deleted.</blockquote><br> -->
 
 When the development environment is ready, VS Code will always display this README file for the
 newly opened workspace, so you are placed right back here to start.
