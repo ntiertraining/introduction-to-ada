@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 08: Input/Output Operations</h1>
 
-<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
+<span>[ <a href="../../README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -112,7 +112,7 @@ ends, takes its place as the record of what occurred.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
+<span>[ <a href="../../README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Notes
 

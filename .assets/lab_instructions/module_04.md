@@ -1,6 +1,6 @@
 <h1><img alt="nTier Logo" style="margin-bottom: -10px;" src="../images/ntier-logo.png">&nbsp;&nbsp; Module 04: Subprograms</h1>
 
-<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
+<span>[ <a href="../../README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Goals
 
@@ -111,7 +111,7 @@ to an enclosing variable.
 ![Stop](../images/stop.png)
 <font size="+1">Congratulations! You have completed this lab.</font>
 
-<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
+<span>[ <a href="../../README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
 ## Notes
 
