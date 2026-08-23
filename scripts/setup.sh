@@ -5,23 +5,42 @@
 #   - This script must be run with system administrator privileges
 #
 
-# Install system dependencies required for building and unpacking Ada tooling
+# Create dependencies and prepare for the download
 
-apt-get update
-apt-get install -y --no-install-recommends build-essential gnat gprbuild
+mkdir -p ~/Downloads ~/.cloudshell
+touch ~/.cloudshell/no-apt-get-warning  # Suppress the CS ephemeral environment warning
+rm ~/setup.log
 
 # Install the correct Alire package for this environment
 
+echo "Installing the latest Alire package..." | tee -a ~/setup.log
+cd ~/Downloads
 alr_latest=$(curl -sL https://api.github.com/repos/alire-project/alire/releases/latest | jq -r .tag_name)
-curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip"
-unzip alr-${alr_latest#v}-bin-x86_64-linux.zip
-mv ./bin/alr /usr/local/bin/alr
-rm -rf ./bin
+if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip" > ~/setup.log 2>&1; then
+    echo "Failed to download Alire package." | tee -a ~/setup.log
+    exit 1
+fi
+unzip -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin
+
+# Install system dependencies required for building and unpacking Ada tooling
+
+echo "Installing the build dependencies..." | tee -a ~/setup.log
+apt-get update > ~/setup.log 2>&1
+if ! apt-get install -y --no-install-recommends build-essential gnat gprbuild > ~/setup.log 2>&1; then
+    echo "Failed to install build dependencies." | tee -a ~/setup.log
+    exit 1
+fi
 
 # Add VS Code extensions (if they are not alreay there)
 
-/google/devshell/editor/code-oss-for-cloud-shell/bin/codeoss-cloudshell --install-extension adacore.ada
+echo "Installing Visual Studio Code extensions..." | tee -a ~/setup.log
+if ! /google/devshell/editor/code-oss-for-cloud-shell/bin/codeoss-cloudshell --install-extension adacore.ada > ~/setup.log 2>&1; then
+    echo "Failed to install Visual Studio Code extension." | tee -a ~/setup.log
+    exit 1
+fi
 
-# Kill the actual Google CS window
+echo "Setup completed successfully." | tee -a ~/setup.log
+
+# Kill the initial Google CS window at the bottom of the screen
 
 # pkill -9 -f -- '^-bash$'
