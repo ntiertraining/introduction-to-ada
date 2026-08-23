@@ -16,17 +16,17 @@ rm ~/setup.log
 echo "Installing the latest Alire package..." | tee -a ~/setup.log
 cd ~/Downloads
 alr_latest=$(curl -sL https://api.github.com/repos/alire-project/alire/releases/latest | jq -r .tag_name)
-if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip" > ~/setup.log 2>&1; then
+if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip" >> ~/setup.log 2>&1; then
     echo "Failed to download Alire package." | tee -a ~/setup.log
     exit 1
 fi
-unzip -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin
+unzip -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin >> ~/setup.log 2>&1
 
 # Install system dependencies required for building and unpacking Ada tooling
 
 echo "Installing the build dependencies..." | tee -a ~/setup.log
 apt-get update > ~/setup.log 2>&1
-if ! apt-get install -y --no-install-recommends build-essential gnat gprbuild > ~/setup.log 2>&1; then
+if ! apt-get install -y --no-install-recommends build-essential gnat gprbuild >> ~/setup.log 2>&1; then
     echo "Failed to install build dependencies." | tee -a ~/setup.log
     exit 1
 fi
@@ -34,7 +34,7 @@ fi
 # Add VS Code extensions (if they are not alreay there)
 
 echo "Installing Visual Studio Code extensions..." | tee -a ~/setup.log
-if ! /google/devshell/editor/code-oss-for-cloud-shell/bin/codeoss-cloudshell --install-extension adacore.ada > ~/setup.log 2>&1; then
+if ! /google/devshell/editor/code-oss-for-cloud-shell/bin/codeoss-cloudshell --install-extension adacore.ada >> ~/setup.log 2>&1; then
     echo "Failed to install Visual Studio Code extension." | tee -a ~/setup.log
     exit 1
 fi
