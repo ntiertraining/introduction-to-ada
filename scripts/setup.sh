@@ -16,12 +16,12 @@ touch ~/.cloudshell/no-apt-get-warning  # Suppress the CS ephemeral environment 
 echo "Installing the latest Alire package..." | tee -a ~/setup.log
 cd ~/Downloads
 alr_latest=$(curl -sL https://api.github.com/repos/alire-project/alire/releases/latest | jq -r .tag_name)
-# if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip" >> ~/setup.log 2>&1; then
-if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip"| tee -a ~/setup.log; then
+echo "Alire version ${alr_latest}" | tee -a ~/setup.log
+if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip" >> ~/setup.log 2>&1; then
     echo "Failed to download Alire package." | tee -a ~/setup.log
     exit 1
 fi
-unzip -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin >> ~/setup.log 2>&1
+unzip -o -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin >> ~/setup.log 2>&1
 
 # Install system dependencies required for building and unpacking Ada tooling
 
@@ -42,6 +42,6 @@ fi
 
 echo "Setup completed successfully." | tee -a ~/setup.log
 
-# Kill the initial Google CS window at the bottom of the screen
+# Kill the initial Google CS window at the bottom of the screen (disabled for now)
 
 # pkill -9 -f -- '^-bash$'

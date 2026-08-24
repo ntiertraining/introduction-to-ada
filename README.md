@@ -33,11 +33,21 @@ Pick the one which best serves your needs:
     Running this from a personal GitHub account is required to launch the Codespace.
     Warning: any work you do will be lost if the Codespace is deleted.</blockquote><br>
 
-<!-- <blockquote><b>Run in a Google Cloud Shell: (a Docker container on Google's servers)</b><br>
+<blockquote><b>Run in a Google Cloud Shell: (a virtual container on Google's servers)</b><br>
     When signed onto Google with a personal account, and with this repository open in GitHub,
-    click <a href="https://www.google.com/search?q=https://shell.cloud.google.com/cloudshell/editor%3Fcloudshell_git_repo%3Dhttps://github.com/ntiertraining/introduction-to-ada%26cloudshell_workspace%3Dintroduction-to-ada">this link</a>.
-    Running this from a personal account is required to launch the Cloud Shell.
-    Warning: any work you do will be lost of the Codespace is deleted.</blockquote><br> -->
+    click <a target="_blank" href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/ntiertraining/introduction-to-ada.git&cloudshell_workspace=.&ephemeral=true">this link</a>.
+    Running this from a personal Google account is required to launch the virtual computer.
+    Google Cloud Shell works a little differently from other environments.
+    It ignores the Docker configuration and does not have the ability to automatically run a setup script.
+    After launching the virtual computer, run the command <code>sudo scripts/setup.sh</code> in the shell window at the bottom
+    of the browser window to load the required packages.
+    When the script is sucessfully finished run the command <code>exit</code>.
+    Right click the *README.md* file in the *Explorer* panel to the left and select *Open Preview*.
+    Close the *Gemini Code Assist* panel at the right; Google deprecated Gemini Assist even though the panel pops up.
+    Click on the instructions for Module 01 in the README file.
+    Warning: this is an ephermal virtual computer and any work you do will be erased when the Google Cloud Shell ends.
+    Google sets the maximum idle time to 40 minutes, and the maximum elapsed time to twelve hours.
+    </blockquote><br>
 
 When the development environment is ready, VS Code will always display this README file for the
 newly opened workspace, so you are placed right back here to start.

@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup",
+      "type": "shell",
+      "command": "sudo scripts/setup.sh",
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}
