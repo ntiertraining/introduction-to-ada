@@ -1,12 +1,6 @@
 [//]: # (README.md)
 [//]: # (Copyright © 2026 nTier Training. All rights reserved.)
 [//]: #
-
-![Banner Light](./.assets/images/banner-introduction-to-ada-light.png#gh-light-mode-only)
-![banner Dark](./.assets/images/banner-introduction-to-ada-dark.png#gh-dark-mode-only)
-
-<span>[ <a href="/README.md#module-lab-instructions">Lab table of contents</a> ]</span>
-
 # Introduction
 
 This is the lab project repository for the nTier Training course *"Introduction to Ada"*.
@@ -20,7 +14,7 @@ Google sets the maximum idle time to 40 minutes, and the maximum elapsed time to
 
 In the newly opened workspace use the following links for the lab instructions:
 
-# Module Lab Instructions
+## Module Lab Instructions
 
 <walkthrough-editor-open-file filePath="./.assets/lab_instructions/module_01.md">Module 01: Introduction to Ada</walkthrough-editor-open-file><br>
 <walkthrough-editor-open-file filePath="./.assets/lab_instructions/module_02.md">Module 02: Basic Syntax and Data Types</walkthrough-editor-open-file><br>

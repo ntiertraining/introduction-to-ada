@@ -4,5 +4,8 @@
     "editor.minimap.enabled": false,
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "sarif-viewer.connectToGithubCodeScanning": "off",
-    "workbench.startupEditor": "readme"
+    "workbench.startupEditor": "readme",
+    "workbench.editorAssociations": {
+        "*.md": "vscode.markdown.preview.editor"
+    }
 }
