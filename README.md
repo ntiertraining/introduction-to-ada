@@ -38,10 +38,10 @@ Pick the one which best serves your needs:
     click <a target="_blank" href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/ntiertraining/introduction-to-ada.git&cloudshell_workspace=.&&cloudshell_tutorial=README_CS.md&ephemeral=true">this link</a>.
     Running this from a personal Google account is required to launch the virtual container.<br>
     As the cloud shell starts follow these instructions:<br><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;1. In the *Open in Cloud Shell* dialog check "Trust repo" and click *Continue*.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;2. If an *Authorize dialog appears, authorize Google.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;3. There will be a *cloud shell tutorial* that appears on the right side of the brower window.
-        Continue to follow the instructions there.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;1. In the <i>Open in Cloud Shell</i> dialog check "Trust repo" and click <i>Continue</i>.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2. If an <i>Authorize Cloud Shell</i> dialog appears click <i>Authorize</i>.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;3. There will be a <i>Cloud Shell Tutorial</i> that appears on the right side of the brower window.
+        Continue with the instructions provided there.<br>
     </blockquote><br>
 
 When the development environment is ready, VS Code will always display this README file for the
