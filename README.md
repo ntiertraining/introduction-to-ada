@@ -14,26 +14,31 @@ This course uses Visual Studio Code as the integrated development environment (I
 The first module focuses are creating an Ada project in the workspace and running the program.
 The subsequent modules add to the project in the same workspace moving forward.
 
-There are three ways to initialize and use the development environment.
+There are four ways to initialize and use the development environment.
 Pick the one which best serves your needs:
 
-<blockquote><b>Run on a local computer:</b><br>
+<blockquote><font size="+2">&#9312;</font> <b>Run on a local computer:</b><br>
     Setup for a Local Development Computer:
-    <a href="./.assets/lab_instructions/local-install.md">follow the instructions on this page</a></blockquote><br>
+    <a href="./.assets/lab_instructions/local-install.md">follow the instructions on this page</a>
+    </blockquote><br>
 
-<blockquote><b>Run in a local Docker container:</b><br>
+<blockquote><font size="+2">&#9313;</font> <b>Run in a local Docker container:</b><br>
     Clone this project onto a local computer with Docker, open the folder in VS Code,
-    and use the <i>Dev Containers: Reopen in Container</i> command to launch the project in a local Docker container.</blockquote><br>
+    and use the <i>Dev Containers: Reopen in Container</i> command to launch the project in a local Docker container.
+    Or, just wait for VS Code to notice the >o>devcontainer.json</i> configuration file and ask if you want to
+    launch it in Docker.
+    </blockquote><br>
 
-<blockquote><b>Run in a GitHub Codespace (a Docker container on GitHub's servers):</b><br>
+<blockquote><font size="+2">&#9314;</font> <b>Run in a GitHub Codespace (a Docker container on GitHub's servers):</b><br>
     When signed onto GitHub with a personal account, and with this repository open in GitHub,
     follow <a href="https://codespaces.new/ntiertraining/introduction-to-ada">this link</a>
     or click the green *Code* button on the GitHub page, select the Codespaces tab,
     and click the green button to <i>Create codespace on main</i>.
     Running this from a personal GitHub account is required to launch the Codespace.
-    Warning: any work you do will be lost if the Codespace is deleted.</blockquote><br>
+    Warning: any work you do will be lost if the Codespace is deleted.
+    </blockquote><br>
 
-<blockquote><b>Run in a Google Cloud Shell: (a virtual container on Google's servers)</b><br>
+<blockquote><font size="+2">&#9315;</font> <b>Run in a Google Cloud Shell: (a virtual container on Google's servers)</b><br>
     When signed onto Google with a personal account, and with this repository open in GitHub,
     click <a target="_blank" href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/ntiertraining/introduction-to-ada.git&cloudshell_workspace=.&&cloudshell_tutorial=README_CS.md&ephemeral=true">this link</a>.
     Running this from a personal Google account is required to launch the virtual container.<br>
@@ -42,13 +47,13 @@ Pick the one which best serves your needs:
     As the cloud shell starts follow these instructions:<br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;1. In the <i>Open in Cloud Shell</i> dialog check "Trust repo" and click <i>Continue</i>.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;2. If an <i>Authorize Cloud Shell</i> dialog appears click <i>Authorize</i>.<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;3. There will be a <i>Cloud Shell Tutorial</i> that appears on the right side of the brower window.
+    &nbsp;&nbsp;&nbsp;&nbsp;3. A <i>Cloud Shell Tutorial</i> will appear on the right side of the brower window.
         Continue with the instructions provided there.<br>
     </blockquote><br>
 
-When the development environment is ready, VS Code will always display this README file for the
-newly opened workspace, so you are placed right back here to start.
-In the newly opened workspace use the following links for the lab instructions:
+When the development environment is ready, this README file is displayed in the
+newly opened workspace and you are placed right back here to start.
+In the workspace use the following links for the lab instructions:
 
 # Module Lab Instructions
 
