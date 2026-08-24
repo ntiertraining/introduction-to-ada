@@ -7,41 +7,37 @@
 
 # Create dependencies and prepare for the download
 
-echo "Initializing setup..." | tee ~/setup.log
+echo "Initializing setup..." | tee scripts/setup.log
 mkdir -p ~/Downloads ~/.cloudshell
 touch ~/.cloudshell/no-apt-get-warning  # Suppress the CS ephemeral environment warning
 
 # Install the correct Alire package for this environment
 
-echo "Installing the latest Alire package..." | tee -a ~/setup.log
+echo "Installing the latest Alire package..." | tee -a scripts/setup.log
 cd ~/Downloads
 alr_latest=$(curl -sL https://api.github.com/repos/alire-project/alire/releases/latest | jq -r .tag_name)
-echo "Alire version ${alr_latest}" | tee -a ~/setup.log
-if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip" >> ~/setup.log 2>&1; then
-    echo "Failed to download Alire package." | tee -a ~/setup.log
+echo "Alire version ${alr_latest}" | tee -a scripts/setup.log
+if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_latest}/alr-${alr_latest#v}-bin-x86_64-linux.zip" >> scripts/setup.log 2>&1; then
+    echo "Failed to download Alire package." | tee -a scripts/setup.log
     exit 1
 fi
-sudo unzip -o -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin >> ~/setup.log 2>&1
+sudo unzip -o -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin >> scripts/setup.log 2>&1
 
 # Install system dependencies required for building and unpacking Ada tooling
 
-echo "Installing the build dependencies..." | tee -a ~/setup.log
-sudo apt-get update > ~/setup.log 2>&1
-if ! sudo apt-get install -y --no-install-recommends build-essential gnat gprbuild >> ~/setup.log 2>&1; then
-    echo "Failed to install build dependencies." | tee -a ~/setup.log
+echo "Installing the build dependencies..." | tee -a scripts/setup.log
+sudo apt-get update >> scripts/setup.log 2>&1
+if ! sudo apt-get install -y --no-install-recommends build-essential gnat gprbuild >> scripts/setup.log 2>&1; then
+    echo "Failed to install build dependencies." | tee -a scripts/setup.log
     exit 1
 fi
 
 # Add VS Code extensions (if they are not alreay there)
 
-echo "Installing Visual Studio Code extensions..." | tee -a ~/setup.log
-if ! /google/devshell/editor/code-oss-for-cloud-shell/bin/remote-cli/codeoss --install-extension adacore.ada >> ~/setup.log 2>&1; then
-    echo "Failed to install Visual Studio Code extension." | tee -a ~/setup.log
+echo "Installing Visual Studio Code extensions..." | tee -a scripts/setup.log
+if ! /google/devshell/editor/code-oss-for-cloud-shell/bin/remote-cli/codeoss --install-extension adacore.ada >> scripts/setup.log 2>&1; then
+    echo "Failed to install Visual Studio Code extension." | tee -a scripts/setup.log
     exit 1
 fi
 
-echo "Setup completed successfully." | tee -a ~/setup.log
-
-# Kill the initial Google CS window at the bottom of the screen (disabled for now)
-
-# pkill -9 -f -- '^-bash$'
+echo "Setup completed successfully." | tee -a scripts/setup.log

@@ -37,6 +37,8 @@ Pick the one which best serves your needs:
     When signed onto Google with a personal account, and with this repository open in GitHub,
     click <a target="_blank" href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/ntiertraining/introduction-to-ada.git&cloudshell_workspace=.&&cloudshell_tutorial=README_CS.md&ephemeral=true">this link</a>.
     Running this from a personal Google account is required to launch the virtual container.<br>
+    Warning: this is an ephemeral virtual computer and any work you do will be erased when the Google Cloud Shell ends.
+    Google sets the maximum idle time to 40 minutes, and the maximum elapsed time to twelve hours.<br><br>
     As the cloud shell starts follow these instructions:<br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;1. In the <i>Open in Cloud Shell</i> dialog check "Trust repo" and click <i>Continue</i>.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;2. If an <i>Authorize Cloud Shell</i> dialog appears click <i>Authorize</i>.<br>
