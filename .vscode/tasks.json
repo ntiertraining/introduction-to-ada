@@ -1,11 +1,18 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Setup",
-      "type": "shell",
-      "command": "sudo scripts/setup.sh",
-      "runOptions": { "runOn": "folderOpen" }
-    }
-  ]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Setup",
+            "type": "shell",
+            "command": "sudo scripts/setup.sh",
+            "runOptions": { "runOn": "folderOpen" }
+        },
+        {
+            "label": "Open README",
+            "type": "shell",
+            "command": "/google/devshell/editor/code-oss-for-cloud-shell/bin/remote-cli/codeoss README.md",
+            "runOptions": { "runOn": "folderOpen" },
+            "presentation": { "reveal": "never" }
+        }
+    ]
 }
