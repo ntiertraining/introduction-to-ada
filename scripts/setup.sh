@@ -35,7 +35,7 @@ fi
 # Add VS Code extensions (if they are not alreay there)
 
 echo "Installing Visual Studio Code extensions..." | tee -a ~/setup.log
-if ! /google/devshell/editor/code-oss-for-cloud-shell/bin/codeoss-cloudshell --install-extension adacore.ada >> ~/setup.log 2>&1; then
+if ! /google/devshell/editor/code-oss-for-cloud-shell/bin/remote-cli/codeoss --install-extension adacore.ada >> ~/setup.log 2>&1; then
     echo "Failed to install Visual Studio Code extension." | tee -a ~/setup.log
     exit 1
 fi
