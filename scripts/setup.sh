@@ -21,13 +21,13 @@ if ! curl -sLO "https://github.com/alire-project/alire/releases/download/${alr_l
     echo "Failed to download Alire package." | tee -a ~/setup.log
     exit 1
 fi
-unzip -o -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin >> ~/setup.log 2>&1
+sudo unzip -o -j alr-${alr_latest#v}-bin-x86_64-linux.zip bin/alr -d /usr/local/bin >> ~/setup.log 2>&1
 
 # Install system dependencies required for building and unpacking Ada tooling
 
 echo "Installing the build dependencies..." | tee -a ~/setup.log
-apt-get update > ~/setup.log 2>&1
-if ! apt-get install -y --no-install-recommends build-essential gnat gprbuild >> ~/setup.log 2>&1; then
+sudo apt-get update > ~/setup.log 2>&1
+if ! sudo apt-get install -y --no-install-recommends build-essential gnat gprbuild >> ~/setup.log 2>&1; then
     echo "Failed to install build dependencies." | tee -a ~/setup.log
     exit 1
 fi

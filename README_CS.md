@@ -10,8 +10,12 @@ Google sets the maximum idle time to 40 minutes, and the maximum elapsed time to
 
 Follow these steps:
 
+1. Close the *cloudshell* terminal window at the bottom of the browser window.
 1. Wait for all the steps to spin-up the cloud shell finish, through launching the development UI.
 1. Look for the "toast" pop-up window asking for permission to run tasks and allow them.
+1. Close the panel to the left of these instructions.
+    Gemini Code Assist has been deprecated and no longer available from Google,
+    but the panel still opens to try and provide AI chat.
 1. Close this window when the tasks are complete.
 
 <!-- 
