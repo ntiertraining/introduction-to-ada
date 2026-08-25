@@ -17,34 +17,40 @@ The subsequent modules add to the project in the same workspace moving forward.
 There are four ways to initialize and use the development environment.
 Pick the one which best serves your needs:
 
-<blockquote><font size="+2">&#9312;</font> <b>Run on a local computer:</b><br>
+## <sup>&#9312;</sup> Run on a local computer:
+<blockquote>
     Setup for a Local Development Computer:
     <a href="./.assets/lab_instructions/local-install.md">follow the instructions on this page</a>
     </blockquote><br>
 
-<blockquote><font size="+2">&#9313;</font> <b>Run in a local Docker container:</b><br>
+## <sup>&#9313;</sup> Run in a local Docker container:
+<blockquote>
     Clone this project onto a local computer with Docker, open the folder in VS Code,
     and use the <i>Dev Containers: Reopen in Container</i> command to launch the project in a local Docker container.
     Or, just wait for VS Code to notice the >o>devcontainer.json</i> configuration file and ask if you want to
     launch it in Docker.
     </blockquote><br>
 
-<blockquote><font size="+2">&#9314;</font> <b>Run in a GitHub Codespace (a Docker container on GitHub's servers):</b><br>
+## <sup>&#9314;</sup> Run in a virtual GitHub Codespace:
+<blockquote>
+    This is a Docker cotnainer running in a Debian Linux virtual computer at GitHub.
     When signed onto GitHub with a personal account, and with this repository open in GitHub,
     follow <a href="https://codespaces.new/ntiertraining/introduction-to-ada">this link</a>
     or click the green *Code* button on the GitHub page, select the Codespaces tab,
     and click the green button to <i>Create codespace on main</i>.
     Running this from a personal GitHub account is required to launch the Codespace.
-    Warning: any work you do will be lost if the Codespace is deleted.
+    Warning: Codespaces are persistent, but any work you do will be lost if the Codespace is deleted.
     </blockquote><br>
 
-<blockquote><font size="+2">&#9315;</font> <b>Run in a Google Cloud Shell: (a virtual container on Google's servers)</b><br>
+## <sup>&#9315;</sup> Run in a virtual Google Cloud Shell:
+<blockquote>
+    This is a Debian Linux virtual computer hosted at Google.
     When signed onto Google with a personal account, and with this repository open in GitHub,
     click <a target="_blank" href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/ntiertraining/introduction-to-ada.git&cloudshell_workspace=.&&cloudshell_tutorial=README_CS.md&ephemeral=true">this link</a>.
-    Running this from a personal Google account is required to launch the virtual container.<br>
+    Running this from a personal Google account is required to launch the virtual container.
     Warning: this is an ephemeral virtual computer and any work you do will be erased when the Google Cloud Shell ends.
     Google sets the maximum idle time to 40 minutes, and the maximum elapsed time to twelve hours.<br><br>
-    As the cloud shell starts follow these instructions:<br><br>
+    Once the cloud shell starts in a new browser tab follow these instructions:<br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;1. In the <i>Open in Cloud Shell</i> dialog check "Trust repo" and click <i>Continue</i>.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;2. If an <i>Authorize Cloud Shell</i> dialog appears click <i>Authorize</i>.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;3. A <i>Cloud Shell Tutorial</i> will appear on the right side of the brower window.
