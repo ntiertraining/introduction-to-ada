@@ -77,10 +77,13 @@ The first prompt will ask for the project name, enter *Flight_Deck*.
 Press return and take the default values for all the remaining prompts until the wizard is finished.
 
 ```bash
-$ alr init --bin --in-place
+$ alr -n init --bin --in-place flight_deck
 ```
 
+- `-n` says to not run interactively and select all the defaults for the configuration.
 - `--bin` tells Alire to scaffold an **executable** project (as opposed to a library).
+- `--in-place` says to build it in the current directory and ignore the directory exists.
+- `flight_deck` will be used as the name of the project.
 - This creates the following structure in this folder.
 The explorer panel will update immediately with a new structure added to the *Explorer* panel on the left:
 
