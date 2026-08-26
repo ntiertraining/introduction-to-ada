@@ -33,28 +33,26 @@ Pick the one which best serves your needs:
 
 ## <sup>&#9314;</sup> Run in a virtual GitHub Codespace:
 <blockquote>
-    This is a Docker cotnainer running in a Debian Linux virtual computer at GitHub.
-    When signed onto GitHub with a personal account, and with this repository open in GitHub,
-    follow <a href="https://codespaces.new/ntiertraining/introduction-to-ada">this link</a>
-    or click the green *Code* button on the GitHub page, select the Codespaces tab,
-    and click the green button to <i>Create codespace on main</i>.
-    Running this from a personal GitHub account is required to launch the Codespace.
+    A Codespace is a Docker cotnainer running in a Debian Linux virtual computer at GitHub.
+    You must be signed onto a personal GitHub account to launch the Codespace.
+    You have this repository open in GitHub,
+    scroll up and click the *Code* button at the top of the repository, select the <i>Codespaces</i> tab,
+    and click the button to <i>Create codespace on main</i>.
     Warning: Codespaces are persistent, but any work you do will be lost if the Codespace is deleted.
     </blockquote><br>
 
 ## <sup>&#9315;</sup> Run in a virtual Google Cloud Shell:
 <blockquote>
-    This is a Debian Linux virtual computer hosted at Google.
-    When signed onto Google with a personal account, and with this repository open in GitHub,
-    click <a target="_blank" href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/ntiertraining/introduction-to-ada.git&cloudshell_workspace=.&&cloudshell_tutorial=README_CS.md&ephemeral=true">this link</a>.
-    Running this from a personal Google account is required to launch the virtual container.
-    Warning: this is an ephemeral virtual computer and any work you do will be erased when the Google Cloud Shell ends.
-    Google sets the maximum idle time to 40 minutes, and the maximum elapsed time to twelve hours.<br><br>
+    A Cloud Shell is a Debian Linux virtual computer hosted at Google.
+    You must be signed onto Google with a personal account to launch the virtual computer.
     Once the cloud shell starts in a new browser tab follow these instructions:<br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;1. In the <i>Open in Cloud Shell</i> dialog check "Trust repo" and click <i>Continue</i>.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;2. If an <i>Authorize Cloud Shell</i> dialog appears click <i>Authorize</i>.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;3. A <i>Cloud Shell Tutorial</i> will appear on the right side of the brower window.
-        Continue with the instructions provided there.<br>
+        Continue with the instructions provided there.<br><br>
+    <a target="_blank" href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/ntiertraining/introduction-to-ada.git&cloudshell_workspace=.&&cloudshell_tutorial=.assets/resources/gcs_tutorial.md&ephemeral=true">Click this link to launch this repository in Google Cloud Shell in a new browser tab</a>.<br><br>
+    Warning: this is an ephemeral virtual computer and any work you do will be erased when the Google Cloud Shell ends.
+    Google sets the maximum idle time to 40 minutes, and the maximum elapsed time to twelve hours.
     </blockquote><br>
 
 When the development environment is ready, this README file is displayed in the

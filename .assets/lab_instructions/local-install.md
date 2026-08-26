@@ -15,7 +15,17 @@ Some may already be installed and configured.
     <ol type="a">
         <li>In the activity bar on the left find and click the *Extensions* icon (hover and it will display the name).</li>
         <li>In *Extensions* panel, in the search bar, enter <i>"Ada & Spark"</i>.</li>
-        <li>Click the package in the results list, and in the main window describing the extension click the button to install it.
+        <li>Click the package in the results list, and in the main window describing the extension click the button to install it.</li>
+    </ol>
+
+1. For Apple macOS only:<br>
+    <ol type="a">
+        <li>In the same way as the previous step, install the extension *CodeLLDB*.
+            macOS no longer supports the Gnu Debugger (*gdb*), and this extension will
+            interface VS Code to the *lldb* command available on macOS.</li>
+        <li>Ada depends on the *Xcode Command Line Tools* (but not the entire Xcode package).
+            Every macOS installation comes with the install command, run:
+            <code type="bash">xcode-select --install</code></li>
     </ol>
 
 1. For Microsoft Windows only: use winget to install *Git* and the Ada package manager *Alire* ($ is the command prompt):

@@ -2,6 +2,18 @@
 
 <span>[ <a href="../../README.md#module-lab-instructions">Lab table of contents</a> ]</span>
 
+## Overview
+
+`Important`: before commencing this lab, right-lick the tab in the VS Code *Editor* area for this file, and click `Close Others`
+to close all the other open editor tabs.
+
+This is the second lab in the Introduction to Ada series.
+There are two ways to approach this lab.
+
+1. If you are confident with the work that you accomplished in Module 01, continue with that work. This lab builds on that environment.
+
+1. In the VS Code terminal window execute the following commands to switch to the solution for Module 01 and 
+
 ## Goals
 
 The lab builds a cockpit telemetry data set inside the existing `flight_deck`

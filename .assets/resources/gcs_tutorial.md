@@ -23,6 +23,7 @@ Follow these steps to take care of it:
     If the script fails to complete, look at the file ~/setup.log for the details on what happened.
 1. Even if the script completes successfully, run the command <code>alr --version</code> to make sure Alire was installed properly.
 1. Run the command <code>gdb --version</code> to make sure the Gnu debugger installed successfully.
+1. Run the command <code>alr toolchain --select</code>.
 1. The vertical bar at the left of the IDE is the <i>Activity Bar</i>.
     Clicking on the icons reveals (or hides) a <i>Sidebar Panel</i> to the right of the <i>Activity Bar</i> (left side of the IDE).
     Find and click on the <i>Extensions</i> icon (four squares, the top right square is twisted) and open the panel.
